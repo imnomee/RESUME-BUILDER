@@ -7,108 +7,61 @@ import {
     Languages,
     Skills,
     Tools,
+    ResumeData,
 } from '../assets/assets';
 
 import { LuMessageCircleMore } from 'react-icons/lu';
 import { FaPhoneAlt } from 'react-icons/fa';
 import { FaGithub } from 'react-icons/fa6';
+import ResumeSection from '../components/ResumeSection';
 
 const Resume = () => {
     return (
-        <div className="flex container max-w-[80vw] py-20 mx-auto">
-            <div className="left bg-gray-100 p-16 min-w-1/3">
-                <div className="mb-8">
+        <div className="flex container max-w-[80vw] py-20 mx-auto overflow-hidden">
+            <section className="left bg-gray-100 p-16 min-w-1/3 border-l rounded-l-2xl border-y border-gray-300">
+                <div className="mb-12">
                     <h1 className="font-serif text-6xl font-semibold mb-4 max-w-1/2 tracking-wide">
-                        Noman Rafiq
+                        {ResumeData.name}
                     </h1>
-                    <p className="text-2xl">UI UX Designer</p>
+                    <p className="text-2xl underline underline-offset-6 text-gray-600">
+                        {ResumeData.title}
+                    </p>
                 </div>
-                <div className="flex flex-col gap-3 mb-8">
-                    <div className="flex items-center gap-2">
-                        <LuMessageCircleMore className="text-2xl" />
-                        <p className="text-lg">heyimnomee@gmail.com</p>
+                <div className="flex flex-col gap-3 mb-12">
+                    <div className="flex items-center gap-4">
+                        <LuMessageCircleMore className="text-2xl text-gray-600" />
+                        <p className="text-lg">{ResumeData.email}</p>
                     </div>
-                    <div className="flex items-center gap-2">
-                        <FaPhoneAlt className="text-2xl" />
-                        <p className="text-lg">+92 335 2765432</p>
+                    <div className="flex items-center gap-4">
+                        <FaPhoneAlt className="text-2xl  text-gray-600" />
+                        <p className="text-lg">{ResumeData.phone}</p>
                     </div>
-                    <div className="flex items-center gap-2">
-                        <FaGithub className="text-2xl" />
+                    <div className="flex items-center gap-4">
+                        <FaGithub className="text-2xl  text-gray-600" />
 
-                        <p className="text-lg">
-                            https://www.github.com/imnomee
-                        </p>
+                        <a
+                            href="https://www.github.com/imnomee"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-lg text-blue-700">
+                            {ResumeData.github}
+                        </a>
                     </div>
                 </div>
-                <div className="mb-8">
+                <ResumeSection title="Skills" items={Skills} />
+                <ResumeSection title="Tools" items={Tools} />
+                <ResumeSection title="Languages" items={Languages} />
+                <ResumeSection title="Certifications" items={Certifications} />
+                <ResumeSection title="Achievements" items={Achievements} />
+            </section>
+            <section className="right p-16 border-r rounded-r-2xl border-y border-gray-300">
+                <div className="mb-8 max-w-[85%]">
                     <h2
-                        className="text-purple-600 text-2xl font-serif font-semibold mb-3
-                    ">
-                        Skills
-                    </h2>
-                    <ul className="list-disc flex flex-wrap gap-4 pl-5">
-                        {Skills.map((skill) => (
-                            <li className="mr-4">{skill}</li>
-                        ))}
-                    </ul>
-                </div>
-                <div className="mb-8">
-                    <h2
-                        className="text-purple-600 text-2xl font-serif font-semibold mb-3
-                    ">
-                        Tools
-                    </h2>
-                    <ul className="list-disc flex flex-wrap gap-4 pl-5">
-                        {Tools.map((tool) => (
-                            <li className="mr-4">{tool}</li>
-                        ))}
-                    </ul>
-                </div>
-                <div className="mb-8">
-                    <h2
-                        className="text-purple-600 text-2xl font-serif font-semibold mb-3
-                    ">
-                        Languages
-                    </h2>
-                    <ul className="list-disc flex flex-wrap gap-4 pl-5">
-                        {Languages.map((lan) => (
-                            <li className="mr-4">{lan}</li>
-                        ))}
-                    </ul>
-                </div>
-                <div className="mb-8">
-                    <h2
-                        className="text-purple-600 text-2xl font-serif font-semibold mb-3
-                    ">
-                        Certifications
-                    </h2>
-                    <ul className="list-disc pl-5">
-                        {Certifications.map((cert) => (
-                            <li className="mb-4">{cert}</li>
-                        ))}
-                    </ul>
-                </div>
-                <div className="mb-8">
-                    <h2
-                        className="text-purple-600 text-2xl font-serif font-semibold mb-3
-                    ">
-                        Achievements
-                    </h2>
-                    <ul className="list-disc pl-5">
-                        {Achievements.map((ach) => (
-                            <li className="mb-4">{ach}</li>
-                        ))}
-                    </ul>
-                </div>
-            </div>
-            <div className="right p-16">
-                <div>
-                    <h2
-                        className="text-purple-600 text-2xl font-serif font-semibold mb-3
+                        className="text-purple-500 text-2xl font-serif font-semibold mb-3
                     ">
                         Objective
                     </h2>
-                    <p>
+                    <p className="text-lg -tracking-normal">
                         Self-taught UI/UX Designer with over 5 years of
                         specialized experience in mobile app and e-commerce
                         designs. Leveraging a background in marketing, I
@@ -116,46 +69,65 @@ const Resume = () => {
                         and functional designs.
                     </p>
                 </div>
-                <div className="experiences">
-                    <h2 className="text-purple-600 text-2xl font-serif font-semibold mb-3
-                    ">Work Experiences</h2>
-                    <ul>
-                        {Experiences.map((exp) => (
-                            <div>
-                                <div>
-                                    <h3>{exp.position}</h3>
-                                    <h4>{exp.company}</h4>
+                <div className="experiences mb-8 max-w-[85%]">
+                    <h2
+                        className="text-purple-500 text-2xl font-serif font-semibold mb-3
+                    ">
+                        Work Experiences
+                    </h2>
+                    <ul className="text-lg">
+                        {Experiences.map((exp, index) => (
+                            <article className="mb-10" key={index}>
+                                <div className="flex gap-4 pb-3">
+                                    <h3 className="text-xl font-semibold">
+                                        {exp.position}
+                                    </h3>
+                                    <h4 className="text-xl pl-4  border-l-2 border-gray-400 text-gray-600">
+                                        {exp.company}
+                                    </h4>
                                 </div>
-                                <div>
+                                <div className="flex gap-4 pb-4 items-center text-gray-600">
                                     <p>{exp.location}</p>
+                                    <div className="rounded-full w-3 h-3 bg-gray-400"></div>
                                     <p>
                                         {exp.startDate} - {exp.endDate}
                                     </p>
                                 </div>
                                 <div>
-                                    <ul>
-                                        {exp.skills.map((skill) => (
-                                            <li>{skill}</li>
+                                    <ul className="list-disc pl-5">
+                                        {exp.skills.map((skill, index) => (
+                                            <li
+                                                className="pl-2 mb-2"
+                                                key={index}>
+                                                {skill}
+                                            </li>
                                         ))}
                                     </ul>
                                 </div>
-                            </div>
+                            </article>
                         ))}
                     </ul>
                 </div>
-                <div>
-                    {Education.map((edu) => (
-                        <div>
-                            <h3>{edu.institution}</h3>
-                            <h4>{edu.degree}</h4>
-                            <p>
+                <div className="mb-8 max-w-[85%]">
+                    <h2
+                        className="text-purple-500 text-2xl font-serif font-semibold mb-3
+                    ">
+                        Education
+                    </h2>
+                    {Education.map((edu, index) => (
+                        <article
+                            className="flex flex-col gap-2 text-xl"
+                            key={index}>
+                            <h3 className="font-semibold">{edu.institution}</h3>
+                            <h4 className="font-light">{edu.degree}</h4>
+                            <p className="text-gray-600">
                                 <span>{edu.startDate}</span> -{' '}
                                 <span>{edu.endDate}</span>
                             </p>
-                        </div>
+                        </article>
                     ))}
                 </div>
-            </div>
+            </section>
         </div>
     );
 };

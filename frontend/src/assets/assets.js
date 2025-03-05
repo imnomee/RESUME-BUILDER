@@ -80,3 +80,11 @@ export const Education = [
         endDate: 2014,
     },
 ];
+
+export const ResumeData = {
+    name: 'Noman Rafiq',
+    title: 'UI UX Designer',
+    email: 'heyimnomee@gmail.com',
+    phone: '+92 335 2765432',
+    github: 'https://www.github.com/imnomee',
+};
