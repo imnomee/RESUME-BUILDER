@@ -15,30 +15,10 @@ import { FaPhoneAlt } from 'react-icons/fa';
 import { FaGithub } from 'react-icons/fa6';
 import ResumeSection from '../components/ResumeSection';
 
-import domtoimage from 'dom-to-image';
-
 const Resume = () => {
-    const download = () => {
-        const element = document.getElementById('resume');
-        domtoimage
-            .toJpeg(element, {
-                quality: 0.95,
-                bgcolor: '#fff',
-                width: element.scrollWidth,
-                height: element.scrollHeight,
-            })
-            .then(function (dataUrl) {
-                var link = document.createElement('a');
-                link.download = `${ResumeData.name}-Resume`;
-                link.href = dataUrl;
-                link.click();
-            });
-    };
     return (
         <div>
-            <button
-                onClick={download}
-                className="bg-purple-500 text-white px-6 py-2 rounded-md mb-4 hover:bg-purple-700 transition">
+            <button className="bg-purple-500 text-white px-6 py-2 rounded-md mb-4 hover:bg-purple-700 transition">
                 Download PDF
             </button>
             <div
