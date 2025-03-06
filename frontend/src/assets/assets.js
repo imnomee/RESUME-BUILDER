@@ -86,5 +86,5 @@ export const ResumeData = {
     title: 'UI UX Designer',
     email: 'heyimnomee@gmail.com',
     phone: '+92 335 2765432',
-    github: 'https://www.github.com/imnomee',
+    github: 'github.com/imnomee',
 };

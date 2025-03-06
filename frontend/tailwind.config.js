@@ -4,5 +4,8 @@ export default {
     theme: {
         extend: {},
     },
+    corePlugins: {
+        color: false,
+    },
     plugins: [],
 };

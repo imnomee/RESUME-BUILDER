@@ -1,1 +1,12 @@
 @import 'tailwindcss';
+
+@layer base {
+    img {
+        display: initial;
+    }
+}
+
+/* Force page break in content */
+.page-break {
+    page-break-before: always;
+}

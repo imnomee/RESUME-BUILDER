@@ -1,5 +1,5 @@
 import React from 'react';
-import Resume from './pages/Resume';
+import Resume from './pages/styleOne/Resume';
 
 const App = () => {
     return (
