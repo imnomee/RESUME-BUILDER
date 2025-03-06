@@ -10,3 +10,14 @@
 .page-break {
     page-break-before: always;
 }
+
+@media print {
+    .footer {
+        position: fixed;
+        bottom: 0;
+    }
+
+    .resume-content {
+        page-break-after: always;
+    }
+}

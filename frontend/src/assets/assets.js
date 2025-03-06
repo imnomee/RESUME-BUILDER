@@ -26,11 +26,13 @@ export const Languages = ['English', 'Urdu', 'Pashto'];
 export const Certifications = [
     'Advanced UX Design Certification, UX Design Institute',
     'Mobile UI Design Specialist, Interaction Design Foundation',
+    'MERN Developer, WebKarobar Development Agency',
 ];
 
 export const Achievements = [
     'Best UI Design Award, Pakistan Tech Awards, 2020',
     'Recognised as "Designer of the Month" thrice at EcomTech',
+    'Topper in Computer Lab Assistant Course from Vocation Training Institute, 2003',
 ];
 
 export const Experiences = [
@@ -74,10 +76,22 @@ export const Experiences = [
 
 export const Education = [
     {
-        degree: 'Bachelors of Computer Science',
+        degree: 'Bachelors in Computer Sciences',
         institution: 'University of Rawalpindi, Pakistan',
         startDate: 2010,
         endDate: 2014,
+    },
+    {
+        degree: 'Intermediate in Computer Sciences',
+        institution: 'Scholars College Cantt, Rawalpindi, Pakistan',
+        startDate: 2004,
+        endDate: 2006,
+    },
+    {
+        degree: 'Secondary School Certificate',
+        institution: 'F.G Boys High School, Rawalpindi, Pakistan',
+        startDate: 1993,
+        endDate: 2002,
     },
 ];
 
@@ -87,4 +101,6 @@ export const ResumeData = {
     email: 'heyimnomee@gmail.com',
     phone: '+92 335 2765432',
     github: 'github.com/imnomee',
+    objective:
+        'Self-taught UI/UX Designer with over 5 years of specialized experience in mobile app and e-commerce designs. Leveraging a background in marketing, I seamlessly integrate consumer insights into intuitive and functional designs.',
 };

@@ -19,8 +19,7 @@ import html2pdf from 'html2pdf.js';
 const Resume = () => {
     const resumeRef = useRef(null);
     const options = {
-        margin: [10, 20, 10, 20], // Top, Right, Bottom, Left
-        image: { type: 'jpeg', quality: 0.98 },
+        margin: [10, 10, 10, 10], // Top, Right, Bottom, Left
         html2canvas: { scale: 2 }, // Increase quality
         jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
         pagebreak: { mode: ['avoid-all', 'css', 'legacy'] },
@@ -43,26 +42,26 @@ const Resume = () => {
                 Download PDF
             </button>
             <div
-                className="flex container w-[794px] mx-auto border rounded-2xl"
+                className="flex container w-[794px] mx-auto"
                 id="resume"
                 ref={resumeRef}>
-                <section className="left py-16 px-8 w-2/5">
-                    <div className="mb-8">
+                <section className="left w-2/5">
+                    <div className="mb-2">
                         <h1 className="font-serif text-5xl font-semibold mb-3 max-w-1/2 tracking-wide">
                             {ResumeData.name}
                         </h1>
-                        <p className="text-2xl underline underline-offset-6 ">
+                        <p className="text-lg underline underline-offset-6 ">
                             {ResumeData.title}
                         </p>
                     </div>
-                    <div className="flex flex-col gap-2 mb-8">
+                    <div className="flex flex-col gap-2 mb-4">
                         <div className="flex items-center gap-2">
                             <LuMessageCircleMore className="text-lg" />
-                            <p className="text-base">{ResumeData.email}</p>
+                            <p className="text-sm">{ResumeData.email}</p>
                         </div>
                         <div className="flex items-center gap-2">
                             <FaPhoneAlt className="text-lg" />
-                            <p className="text-base">{ResumeData.phone}</p>
+                            <p className="text-sm">{ResumeData.phone}</p>
                         </div>
                         <div className="flex items-center gap-2">
                             <FaGithub className="text-lg" />
@@ -71,56 +70,52 @@ const Resume = () => {
                                 href="https://www.github.com/imnomee"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="text-base">
+                                className="text-sm">
                                 {ResumeData.github}
                             </a>
                         </div>
                     </div>
-                    <ResumeSection title="Skills" items={Skills} />
-                    <ResumeSection title="Tools" items={Tools} />
-                    <ResumeSection title="Languages" items={Languages} />
-                    <div className="mb-8 max-w-[95%]">
+                    <div className="mb-2 w-[90%]">
                         <h2
-                            className=" text-xl font-serif font-semibold mb-3
+                            className=" text-lg font-serif font-semibold mb-1
                     ">
                             Objective
                         </h2>
-                        <p className="text-baase tracking-wide">
-                            Self-taught UI/UX Designer with over 5 years of
-                            specialized experience in mobile app and e-commerce
-                            designs. Leveraging a background in marketing, I
-                            seamlessly integrate consumer insights into
-                            intuitive and functional designs.
-                        </p>
+                        <p className="text-sm">{ResumeData.objective}</p>
                     </div>
-                </section>
-                <section className="right py-16 px-8 border-l w-3/5">
+                    <ResumeSection title="Skills" items={Skills} />
+                    <ResumeSection title="Tools" items={Tools} />
+                    <ResumeSection title="Languages" items={Languages} />
                     <ResumeSection
                         title="Certifications"
                         items={Certifications}
                     />
                     <ResumeSection title="Achievements" items={Achievements} />
-                    <div className="experiences mb-8 max-w-[95%]">
+                </section>
+                <section className="right px-8 border-l w-3/5">
+                    <div className="experiences mb-4 max-w-[90%]">
                         <h2
-                            className=" text-xl font-serif font-semibold mb-3
+                            className=" text-lg font-serif font-semibold mb-1
                     ">
                             Work Experiences
                         </h2>
-                        <ul className="text-base">
+                        <ul className="text-sm">
                             {Experiences.map((exp, index) => (
                                 <article className="mb-4" key={index}>
-                                    <div className="flex gap-4 pb-1">
-                                        <h3 className="text-lg font-semibold">
+                                    <div className="flex gap-2">
+                                        <h3 className="text-base font-semibold">
                                             {exp.position}
                                         </h3>
-                                        <h4 className="text-lg pl-4 border-l-2  ">
+                                        <h4 className="text-base pl-2 border-l  ">
                                             {exp.company}
                                         </h4>
                                     </div>
-                                    <div className="flex gap-4 pb-4 items-center ">
-                                        <p>{exp.location}</p>
+                                    <div className="flex flex-row-reverse gap-2 pb-2 justify-end">
+                                        <p className="text-xs">
+                                            {exp.location}
+                                        </p>
                                         <div className="rounded-full w-3 h-3 "></div>
-                                        <p>
+                                        <p className="font-semibold">
                                             {exp.startDate} - {exp.endDate}
                                         </p>
                                     </div>
@@ -139,23 +134,23 @@ const Resume = () => {
                             ))}
                         </ul>
                     </div>
-                    <div className="page-break"></div>
-                    <div className="mb-8 max-w-[95%]">
+                    {/* <div className="page-break"></div> */}
+                    <div className="mb-4 max-w-[85%]">
                         <h2
-                            className=" text-xl font-serif font-semibold mb-3
+                            className=" text-lg font-serif font-semibold mb-1
                     ">
                             Education
                         </h2>
                         {Education.map((edu, index) => (
                             <article
-                                className="flex flex-col gap-1 text-lg"
+                                className="flex flex-col text-base mb-4"
                                 key={index}>
                                 <h3 className="font-semibold">
                                     {edu.institution}
                                 </h3>
                                 <div className="flex flex-row-reverse items-center justify-between">
                                     <h4 className="font-light">{edu.degree}</h4>
-                                    <p className="text-base">
+                                    <p className="text-sm">
                                         <span>{edu.startDate}</span> -{' '}
                                         <span>{edu.endDate}</span>
                                     </p>
