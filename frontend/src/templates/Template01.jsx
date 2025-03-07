@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import {
     Achievements,
     Certifications,
@@ -7,61 +7,34 @@ import {
     Languages,
     Skills,
     Tools,
-    ResumeData,
-} from '../../assets/assets';
+} from '../assets/assets.js';
 
 import { LuMessageCircleMore } from 'react-icons/lu';
 import { FaPhoneAlt } from 'react-icons/fa';
 import { FaGithub } from 'react-icons/fa6';
-import ResumeSection from '../../components/ResumeSection';
-import html2pdf from 'html2pdf.js';
+import ResumeSection from '../components/ResumeSection.jsx';
 
-const Resume = () => {
-    const resumeRef = useRef(null);
-    const options = {
-        margin: [10, 10, 10, 10], // Top, Right, Bottom, Left
-        html2canvas: { scale: 2 }, // Increase quality
-        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-        pagebreak: { mode: ['avoid-all', 'css', 'legacy'] },
-    };
-
-    const handleDownloadPDF = () => {
-        html2pdf()
-            .from(resumeRef.current)
-            .set(options)
-            .save(`${ResumeData.name}-Resume.pdf`)
-            .then(() => console.log('✅ PDF Downloaded!'))
-            .catch((err) => console.error('❌ Error generating PDF:', err));
-    };
-
+const Template1 = ({ userData }) => {
     return (
         <div>
-            <button
-                className="bg-purple-500 text-white px-6 py-2 rounded-md mb-4 hover:bg-purple-700 transition"
-                onClick={handleDownloadPDF}>
-                Download PDF
-            </button>
-            <div
-                className="flex container w-[794px] mx-auto"
-                id="resume"
-                ref={resumeRef}>
+            <div className="flex container w-[794px] mx-auto" id="resume">
                 <section className="left w-2/5">
                     <div className="mb-2">
                         <h1 className="font-serif text-5xl font-semibold mb-3 max-w-1/2 tracking-wide">
-                            {ResumeData.name}
+                            {userData.name}
                         </h1>
                         <p className="text-lg underline underline-offset-6 ">
-                            {ResumeData.title}
+                            {userData.title}
                         </p>
                     </div>
                     <div className="flex flex-col gap-2 mb-4">
                         <div className="flex items-center gap-2">
                             <LuMessageCircleMore className="text-lg" />
-                            <p className="text-sm">{ResumeData.email}</p>
+                            <p className="text-sm">{userData.email}</p>
                         </div>
                         <div className="flex items-center gap-2">
                             <FaPhoneAlt className="text-lg" />
-                            <p className="text-sm">{ResumeData.phone}</p>
+                            <p className="text-sm">{userData.phone}</p>
                         </div>
                         <div className="flex items-center gap-2">
                             <FaGithub className="text-lg" />
@@ -71,7 +44,7 @@ const Resume = () => {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="text-sm">
-                                {ResumeData.github}
+                                {userData.github}
                             </a>
                         </div>
                     </div>
@@ -81,7 +54,7 @@ const Resume = () => {
                     ">
                             Objective
                         </h2>
-                        <p className="text-sm">{ResumeData.objective}</p>
+                        <p className="text-sm">{userData.objective}</p>
                     </div>
                     <ResumeSection title="Skills" items={Skills} />
                     <ResumeSection title="Tools" items={Tools} />
@@ -92,7 +65,7 @@ const Resume = () => {
                     />
                     <ResumeSection title="Achievements" items={Achievements} />
                 </section>
-                <section className="right px-8 border-l w-3/5">
+                <section className="right px-8 pt-4 border-l w-3/5">
                     <div className="experiences mb-4 max-w-[90%]">
                         <h2
                             className=" text-lg font-serif font-semibold mb-1
@@ -120,10 +93,10 @@ const Resume = () => {
                                         </p>
                                     </div>
                                     <div>
-                                        <ul className="list-disc pl-5">
+                                        <ul className="list-disc pl-4">
                                             {exp.skills.map((skill, index) => (
                                                 <li
-                                                    className="pl-2 mb-2"
+                                                    className="pl-1 mb-2"
                                                     key={index}>
                                                     {skill}
                                                 </li>
@@ -164,4 +137,4 @@ const Resume = () => {
     );
 };
 
-export default Resume;
+export default Template1;
