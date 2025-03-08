@@ -1,14 +1,4 @@
 import React from 'react';
-import {
-    Achievements,
-    Certifications,
-    Education,
-    Experiences,
-    Languages,
-    Skills,
-    Tools,
-} from '../assets/assets.js';
-
 import { LuMessageCircleMore } from 'react-icons/lu';
 import { FaPhoneAlt } from 'react-icons/fa';
 import { FaGithub } from 'react-icons/fa6';
@@ -16,8 +6,10 @@ import ResumeSection from '../components/ResumeSection.jsx';
 
 const Template1 = ({ userData }) => {
     return (
-        <div>
-            <div className="flex container w-[794px] mx-auto" id="resume">
+        <div className="w-full overflow-x-auto">
+            <div
+                className="flex container w-[794px] mx-auto max-w-full"
+                id="resume">
                 <section className="left w-2/5">
                     <div className="mb-2">
                         <h1 className="font-serif text-5xl font-semibold mb-3 max-w-1/2 tracking-wide">
@@ -56,24 +48,30 @@ const Template1 = ({ userData }) => {
                         </h2>
                         <p className="text-sm">{userData.objective}</p>
                     </div>
-                    <ResumeSection title="Skills" items={Skills} />
-                    <ResumeSection title="Tools" items={Tools} />
-                    <ResumeSection title="Languages" items={Languages} />
+                    <ResumeSection title="Skills" items={userData.skills} />
+                    <ResumeSection title="Tools" items={userData.tools} />
+                    <ResumeSection
+                        title="Languages"
+                        items={userData.languages}
+                    />
                     <ResumeSection
                         title="Certifications"
-                        items={Certifications}
+                        items={userData.certifications}
                     />
-                    <ResumeSection title="Achievements" items={Achievements} />
+                    <ResumeSection
+                        title="Achievements"
+                        items={userData.achievements}
+                    />
                 </section>
-                <section className="right px-8 pt-4 border-l w-3/5">
-                    <div className="experiences mb-4 max-w-[90%]">
+                <section className="right px-8 border-l w-3/5">
+                    <div className="experiences mb-4 max-w-full">
                         <h2
                             className=" text-lg font-serif font-semibold mb-1
                     ">
                             Work Experiences
                         </h2>
                         <ul className="text-sm">
-                            {Experiences.map((exp, index) => (
+                            {userData.experiences.map((exp, index) => (
                                 <article className="mb-4" key={index}>
                                     <div className="flex gap-2">
                                         <h3 className="text-base font-semibold">
@@ -107,26 +105,28 @@ const Template1 = ({ userData }) => {
                             ))}
                         </ul>
                     </div>
-                    {/* <div className="page-break"></div> */}
+
                     <div className="mb-4 max-w-[85%]">
                         <h2
                             className=" text-lg font-serif font-semibold mb-1
                     ">
                             Education
                         </h2>
-                        {Education.map((edu, index) => (
+                        {userData.education.map((edu, index) => (
                             <article
                                 className="flex flex-col text-base mb-4"
                                 key={index}>
                                 <h3 className="font-semibold">
                                     {edu.institution}
                                 </h3>
-                                <div className="flex flex-row-reverse items-center justify-between">
-                                    <h4 className="font-light">{edu.degree}</h4>
+                                <div className="flex flex-row items-center gap-4">
                                     <p className="text-sm">
                                         <span>{edu.startDate}</span> -{' '}
                                         <span>{edu.endDate}</span>
                                     </p>
+                                    <h4 className="font-light text-base">
+                                        {edu.degree}
+                                    </h4>
                                 </div>
                             </article>
                         ))}
