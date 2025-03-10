@@ -13,7 +13,7 @@ const ResumePreview = ({ userData, selectedTemplate }) => {
             <div className="relative flex justify-center pb-[600px] lg:pb-0">
                 <div
                     ref={resumeRef}
-                    className="bg-white p-6 shadow-md rounded-md mb-6 w-[210mm] h-[297mm] transform origin-top scale-50 lg:scale-100 absolute lg:relative">
+                    className="bg-white p-6 shadow-md rounded-md mb-6 w-[210mm] h-[297mm] transform origin-top scale-35 xs:scale-50 sm:scale-70  md:scale-80 lg:scale-100 absolute lg:relative">
                     {selectedTemplate === 'template1' && (
                         <Template1 userData={userData} />
                     )}
