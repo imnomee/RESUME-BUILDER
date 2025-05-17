@@ -7,8 +7,9 @@ import { fileURLToPath } from 'url';
 import path, { dirname } from 'path';
 
 import { connectDB } from './config/db.js';
-import authRoutes from './routes/auth.Route.js';
 const app = express();
+import authRoutes from './routes/auth.Route.js';
+import resumeRoutes from './routes/resume.Route.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
@@ -23,6 +24,7 @@ app.use(
 app.use(express.json());
 
 app.use('/api/v1/auth', authRoutes);
+app.use('/api/v1/resumes', resumeRoutes);
 
 app.use(
     '/uploads',
