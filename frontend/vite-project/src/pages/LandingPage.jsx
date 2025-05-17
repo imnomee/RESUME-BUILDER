@@ -5,7 +5,7 @@ import SignUp from '../pages/Auth/SignUp';
 import Modal from '../components/Modal';
 
 const LandingPage = () => {
-    const [openAuthModal, setOpenAuthModal] = useState(true);
+    const [openAuthModal, setOpenAuthModal] = useState(false);
     const [currentPage, setCurrentPage] = useState('login');
     const handleCTA = () => {};
     return (
@@ -13,7 +13,9 @@ const LandingPage = () => {
             <div className="mx-auto px-4 py-6">
                 <header className="flex justify-between items-center mb-8">
                     <div className="text-xl font-bold">Resume Builder</div>
-                    <button className="bg-purple-100 text-sm font-semibold text-black px-7 py-2.5 rounded-lg hover:bg-gray-800 hover:text-white transition-colors cursor-pointer">
+                    <button
+                        className="bg-purple-100 text-sm font-semibold text-black px-7 py-2.5 rounded-lg hover:bg-gray-800 hover:text-white transition-colors cursor-pointer"
+                        onClick={() => setOpenAuthModal(true)}>
                         Login / Sign Up
                     </button>
                 </header>
