@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import HERO_IMG from '../assets/hero-img.png';
-import { useNavigate } from 'react-router-dom';
+import Login from '../pages/Auth/Login';
+import SignUp from '../pages/Auth/SignUp';
+import Modal from '../components/Modal';
 
 const LandingPage = () => {
-    const navigate = useNavigate();
-
-    const [openAuthModal, setOpenAuthModal] = useState(false);
+    const [openAuthModal, setOpenAuthModal] = useState(true);
     const [currentPage, setCurrentPage] = useState('login');
     const handleCTA = () => {};
     return (
@@ -81,6 +81,22 @@ const LandingPage = () => {
             <div className="text-sm bg-gray-50 text-secondary text-center p-5 mt-5">
                 Made with ❤️... Happy Resuming
             </div>
+            <Modal
+                isOpen={openAuthModal}
+                onClose={() => {
+                    setOpenAuthModal(false);
+                    setCurrentPage('login');
+                }}
+                hideHeader>
+                <div>
+                    {currentPage === 'login' && (
+                        <Login setCurrentPage={setCurrentPage} />
+                    )}
+                    {currentPage === 'signup' && (
+                        <SignUp setCurrentPage={setCurrentPage} />
+                    )}
+                </div>
+            </Modal>
         </div>
     );
 };
