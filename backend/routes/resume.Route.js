@@ -14,8 +14,8 @@ const router = express.Router();
 router.post('/', protect, createResume);
 router.get('/', protect, getUserResumes);
 router.get('/:resumeId', protect, getResumeById);
-router.put('/:resumeid', protect, updateResume);
+router.put('/:resumeId', protect, updateResume);
 router.put('/:id/upload-images', protect, uploadresumeImages);
-router.delete('/:id', protect, deleteResume);
+router.delete('/:resumeId', protect, deleteResume);
 
 export default router;

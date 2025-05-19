@@ -86,7 +86,7 @@ export const createResume = async (req, res) => {
 export const getResumeById = async (req, res) => {
     try {
         const resume = await Resume.findOne({
-            _id: req.params.id,
+            _id: req.params.resumeId,
             userId: req.user._id,
         });
         if (!resume) {
@@ -121,8 +121,39 @@ export const getUserResumes = async (req, res) => {
 //@desc     Delete a Resume
 //@route    DELETE /api/v1/resumes/:resumeId
 //@access   Private
-export const deleteResume = async () => {
+export const deleteResume = async (req, res) => {
     try {
+        const resume = await Resume.findOne({
+            _id: req.params.resumeId,
+            userId: req.user._id,
+        });
+        if (!resume) {
+            return res.status(404).json({ message: 'Resume Not FOund.' });
+        }
+        // Delete the profile image if it exists
+        if (resume.profileInfo.profileImg) {
+            const imagePath = path.join(
+                __dirname,
+                '../uploads',
+                resume.profileInfo.profileImg
+            );
+            fs.unlink(imagePath, (err) => {
+                if (err) {
+                    console.error('Error deleting image:', err);
+                } else {
+                    console.log('Image deleted successfully');
+                }
+            });
+        }
+        const deleted = await Resume.findOneAndDelete({
+            _id: req.params.resumeId,
+            userId: req.user._id,
+        });
+        if (!deleted) {
+            return res.status(404).json({ message: 'Resume Not FOund.' });
+        }
+        return res.status(200).json({ message: 'Resume deleted successfully' });
+        s;
     } catch (error) {
         console.error(error);
         return res
@@ -134,10 +165,10 @@ export const deleteResume = async () => {
 //@desc     Update a Resume
 //@route    PUT /api/v1/resumes/:resumeId
 //@access   Private
-export const updateResume = async () => {
+export const updateResume = async (req, res) => {
     try {
         const resume = await Resume.findOne({
-            _id: req.params.id,
+            _id: req.params.resumeId,
             userId: req.user._id,
         });
         if (!resume) {
@@ -145,7 +176,7 @@ export const updateResume = async () => {
         }
 
         Object.assign(resume, req.body);
-        const savedResume = await Resume.save();
+        const savedResume = await resume.save();
         return res.status(201).json(savedResume);
     } catch (error) {
         console.error(error);
