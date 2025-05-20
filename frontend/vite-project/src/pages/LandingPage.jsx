@@ -5,12 +5,21 @@ import SignUp from '../pages/Auth/SignUp';
 import Modal from '../components/Modal';
 import { UserContext } from '../context/userContext';
 import ProfileCard from '../components/Cards/ProfileCard';
+import { useNavigate } from 'react-router-dom';
 
 const LandingPage = () => {
+    const navigate = useNavigate();
     const { user } = useContext(UserContext);
     const [openAuthModal, setOpenAuthModal] = useState(false);
     const [currentPage, setCurrentPage] = useState('login');
-    const handleCTA = () => {};
+    const handleCTA = () => {
+        if (!user) {
+            setOpenAuthModal(true);
+            setCurrentPage('signup');
+        } else {
+            navigate('/dashboard');
+        }
+    };
     return (
         <div className="w-full min-h-full bg-white">
             <div className="mx-auto px-4 py-6">
