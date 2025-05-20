@@ -1,11 +1,17 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Input from '../../components/inputs/Input.jsx';
 import { validateEmail } from '../../utils/helper.js';
+import { UserContext } from '../../context/userContext.jsx';
+import axiosInstance from '../../utils/axiosInstance.js';
+import { API_PATHS } from '../../utils/apiPaths.js';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const Login = ({ setCurrentPage }) => {
+    const { updateUser } = useContext(UserContext);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
+    const navigate = useNavigate();
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -20,6 +26,22 @@ const Login = ({ setCurrentPage }) => {
         }
 
         setError('');
+
+        try {
+            const response = await axiosInstance.post(API_PATHS.AUTH.LOGIN, {
+                email,
+                password,
+            });
+            const { token } = response.data;
+            if (token) {
+                localStorage.setItem('token', token);
+                updateUser(response.data);
+                navigate('/dashboard');
+            }
+        } catch (error) {
+            console.error('Error logging in:', error);
+            setError(error.response?.data?.message || 'Login failed');
+        }
     };
 
     return (

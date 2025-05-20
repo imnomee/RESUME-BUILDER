@@ -1,10 +1,13 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import HERO_IMG from '../assets/hero-img.png';
 import Login from '../pages/Auth/Login';
 import SignUp from '../pages/Auth/SignUp';
 import Modal from '../components/Modal';
+import { UserContext } from '../context/userContext';
+import ProfileCard from '../components/Cards/ProfileCard';
 
 const LandingPage = () => {
+    const { user } = useContext(UserContext);
     const [openAuthModal, setOpenAuthModal] = useState(false);
     const [currentPage, setCurrentPage] = useState('login');
     const handleCTA = () => {};
@@ -13,11 +16,16 @@ const LandingPage = () => {
             <div className="mx-auto px-4 py-6">
                 <header className="flex justify-between items-center mb-8">
                     <div className="text-xl font-bold">Resume Builder</div>
-                    <button
-                        className="bg-purple-100 text-sm font-semibold text-black px-7 py-2.5 rounded-lg hover:bg-gray-800 hover:text-white transition-colors cursor-pointer"
-                        onClick={() => setOpenAuthModal(true)}>
-                        Login / Sign Up
-                    </button>
+
+                    {user ? (
+                        <ProfileCard />
+                    ) : (
+                        <button
+                            className="bg-purple-100 text-sm font-semibold text-black px-7 py-2.5 rounded-lg hover:bg-gray-800 hover:text-white transition-colors cursor-pointer"
+                            onClick={() => setOpenAuthModal(true)}>
+                            Login / Sign Up
+                        </button>
+                    )}
                 </header>
                 <div className="flex flex-col md:flex-row items-center">
                     <div className="w-full md:w-1/2 pr-4 mb-8 md:mb-0">
