@@ -4,7 +4,7 @@ import { validateEmail } from '../../utils/helper.js';
 import { UserContext } from '../../context/userContext.jsx';
 import axiosInstance from '../../utils/axiosInstance.js';
 import { API_PATHS } from '../../utils/apiPaths.js';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Login = ({ setCurrentPage }) => {
     const { updateUser } = useContext(UserContext);

@@ -10,7 +10,7 @@ import uploadImage from '../../utils/uploadImage.js';
 
 const SignUp = ({ setCurrentPage }) => {
     const navigate = useNavigate();
-    const { user, updateUser } = useContext(UserContext);
+    const { updateUser } = useContext(UserContext);
     const [profilePic, setProfilepic] = useState(null);
     const [fullName, setFullName] = useState('');
     const [email, setEmail] = useState('');
