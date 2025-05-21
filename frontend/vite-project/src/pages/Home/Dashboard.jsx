@@ -5,6 +5,9 @@ import { useNavigate } from 'react-router-dom';
 import DashboardLayout from '../../components/layouts/DashboardLayout';
 import { LuCirclePlus } from 'react-icons/lu';
 import ResumeSummaryCard from '../../components/Cards/ResumeSummaryCard';
+import moment from 'moment';
+import CreateResumeForm from '../Home/CreateResumeForm';
+import Modal from '../../components/Modal';
 
 const Dashboard = () => {
     const navigate = useNavigate();
@@ -39,10 +42,32 @@ const Dashboard = () => {
                 </div>
                 {allResumes?.map((resume) => {
                     return (
-                        <ResumeSummaryCard key={resume._id} resume={resume} />
+                        <ResumeSummaryCard
+                            key={resume._id}
+                            imgUrl={resume.thumbnailLink || null}
+                            title={resume.title}
+                            lastUpdated={
+                                resume?.updatedAt
+                                    ? moment(resume.updatedAt).format(
+                                          'Do MMM YYYY'
+                                      )
+                                    : ''
+                            }
+                            onSelect={() => navigate(`/resume/${resume?._id}`)}
+                        />
                     );
                 })}
             </div>
+            <Modal
+                isOpen={openCreateModal}
+                onClose={() => {
+                    setOpenCreateModal(false);
+                }}
+                hideHeader>
+                <div className="">
+                    <CreateResumeForm />
+                </div>
+            </Modal>
         </DashboardLayout>
     );
 };

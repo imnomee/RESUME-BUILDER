@@ -13,6 +13,7 @@ const resumeSchema = new mongoose.Schema(
         },
         thumbnailLink: {
             type: String,
+            default: '',
         },
         template: {
             theme: String,
