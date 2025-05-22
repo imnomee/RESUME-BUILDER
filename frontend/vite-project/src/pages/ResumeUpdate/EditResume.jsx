@@ -18,6 +18,7 @@ import StepProgress from '../../components/StepProgress';
 import ProfileInfoForm from './ProfileInfoForm';
 import ContactInfoForm from './ContactInfoForm';
 import WorkExperienceForm from './WorkExperienceForm';
+import EducationDetailsForm from './EducationDetailsForm';
 
 const EditResume = () => {
     const { resumeId } = useParams();
@@ -127,7 +128,7 @@ const EditResume = () => {
             case 'work-experience':
                 return (
                     <WorkExperienceForm
-                        contactInfo={resumeData?.workExperience}
+                        workExperience={resumeData?.workExperience}
                         updateArrayItem={(index, key, value) => {
                             updateArrayItem(
                                 'workExperience',
@@ -141,6 +142,21 @@ const EditResume = () => {
                         }}
                         removeArrayItem={(index) =>
                             removeArrayItem('workExperience', index)
+                        }
+                    />
+                );
+            case 'educational-info':
+                return (
+                    <EducationDetailsForm
+                        educationInfo={resumeData?.education}
+                        updateArrayItem={(index, key, value) =>
+                            updateArrayItem('education', index, key, value)
+                        }
+                        addArrayItem={(newItem) =>
+                            addArrayItem('education', newItem)
+                        }
+                        removeArrayItem={(index) =>
+                            removeArrayItem('education', index)
                         }
                     />
                 );
@@ -160,7 +176,7 @@ const EditResume = () => {
             if (key === null) {
                 updatedArray[index] = value;
             } else {
-                updateArray[index] = { ...updatedArray[index], [key]: value };
+                updatedArray[index] = { ...updatedArray[index], [key]: value };
             }
             return {
                 ...prevState,
