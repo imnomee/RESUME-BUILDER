@@ -15,6 +15,7 @@ import TitleInput from '../../components/inputs/TitleInput';
 import axiosInstance from '../../utils/axiosInstance';
 import { API_PATHS } from '../../utils/apiPaths';
 import StepProgress from '../../components/StepProgress';
+import ProfileInfoForm from './ProfileInfoForm';
 
 const EditResume = () => {
     const { resumeId } = useParams();
@@ -100,9 +101,37 @@ const EditResume = () => {
     const validateAndNext = (e) => {};
     const goToNextStep = () => {};
     const goToPrevStep = () => {};
-    const renderForm = () => {};
-
-    const updateSection = (section, key, value) => {};
+    const renderForm = () => {
+        switch (currentPage) {
+            case 'profile-info':
+                return (
+                    <ProfileInfoForm
+                        profileData={resumeData?.profileInfo}
+                        updateSection={(key, value) =>
+                            updateSection('profileInfo', key, value)
+                        }
+                        onNext={validateAndNext}
+                    />
+                );
+            case 'contact-info':
+                return (
+                    <ContactInfoForm
+                        contactInfo={resumeData?.contactInfo}
+                        updateSection={(key, value) =>
+                            updateSection('contactInfo', key, value)
+                        }
+                    />
+                );
+            default:
+                return null;
+        }
+    };
+    const updateSection = (section, key, value) => {
+        setResumeData((prevState) => ({
+            ...prevState,
+            [section]: { ...prevState[section], [key]: value },
+        }));
+    };
     const updateArrayItem = (section, index, key, value) => {};
     const addArrayItem = (section, newItem) => {};
     const removeArrayItem = (section, index) => {};
@@ -198,7 +227,7 @@ const EditResume = () => {
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                     <div className="bg-white rounded-lg border border-purple-100 overflow-hidden">
-                        <StepProgress progress={30} />
+                        <StepProgress progress={0} />
                         {renderForm()}
                         <div className="mx-5">
                             {errorMsg && (
