@@ -3,6 +3,7 @@ import { LuCheck, LuPen, LuPencil } from 'react-icons/lu';
 
 const TitleInput = ({ title, setTitle }) => {
     const [showInput, setShowInput] = useState(false);
+
     return (
         <div className="flex items-center gap-3">
             {showInput ? (
