@@ -17,6 +17,7 @@ import { API_PATHS } from '../../utils/apiPaths';
 import StepProgress from '../../components/StepProgress';
 import ProfileInfoForm from './ProfileInfoForm';
 import ContactInfoForm from './ContactInfoForm';
+import WorkExperienceForm from './WorkExperienceForm';
 
 const EditResume = () => {
     const { resumeId } = useParams();
@@ -26,7 +27,7 @@ const EditResume = () => {
     const [baseWidth, setBaseWidth] = useState(800);
     const [openThemeSelector, setOpenThemeSelector] = useState(false);
     const [openPreviewModal, setOpenPreviewModaal] = useState(false);
-    const [currentPage, setCurrentPage] = useState('contact-info');
+    const [currentPage, setCurrentPage] = useState('work-experience');
     const [progress, setProgress] = useState(0);
     const [resumeData, setResumeData] = useState({
         title: '',
@@ -123,6 +124,26 @@ const EditResume = () => {
                         }
                     />
                 );
+            case 'work-experience':
+                return (
+                    <WorkExperienceForm
+                        contactInfo={resumeData?.workExperience}
+                        updateArrayItem={(index, key, value) => {
+                            updateArrayItem(
+                                'workExperience',
+                                index,
+                                key,
+                                value
+                            );
+                            addArrayItem((newItem) =>
+                                addArrayItem('workExperience', newItem)
+                            );
+                        }}
+                        removeArrayItem={(index) =>
+                            removeArrayItem('workExperience', index)
+                        }
+                    />
+                );
             default:
                 return null;
         }
@@ -133,7 +154,20 @@ const EditResume = () => {
             [section]: { ...prevState[section], [key]: value },
         }));
     };
-    const updateArrayItem = (section, index, key, value) => {};
+    const updateArrayItem = (section, index, key, value) => {
+        setResumeData((prevState) => {
+            const updatedArray = [...prevState[section]];
+            if (key === null) {
+                updatedArray[index] = value;
+            } else {
+                updateArray[index] = { ...updatedArray[index], [key]: value };
+            }
+            return {
+                ...prevState,
+                [section]: updatedArray,
+            };
+        });
+    };
     const addArrayItem = (section, newItem) => {};
     const removeArrayItem = (section, index) => {};
     const uploadResumeImages = async () => {};
