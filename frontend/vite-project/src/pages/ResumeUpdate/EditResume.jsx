@@ -16,6 +16,7 @@ import axiosInstance from '../../utils/axiosInstance';
 import { API_PATHS } from '../../utils/apiPaths';
 import StepProgress from '../../components/StepProgress';
 import ProfileInfoForm from './ProfileInfoForm';
+import ContactInfoForm from './ContactInfoForm';
 
 const EditResume = () => {
     const { resumeId } = useParams();
@@ -25,7 +26,7 @@ const EditResume = () => {
     const [baseWidth, setBaseWidth] = useState(800);
     const [openThemeSelector, setOpenThemeSelector] = useState(false);
     const [openPreviewModal, setOpenPreviewModaal] = useState(false);
-    const [currentPage, setCurrentPage] = useState('profile-info');
+    const [currentPage, setCurrentPage] = useState('contact-info');
     const [progress, setProgress] = useState(0);
     const [resumeData, setResumeData] = useState({
         title: '',
