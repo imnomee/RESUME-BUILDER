@@ -15,7 +15,7 @@ const ProjectInfoForm = ({
                     <div
                         key={index}
                         className="border border-gray-200/80 p-4 rounded-lg relative">
-                        <div className="grid grid-cols-1">
+                        <div className="grid grid-cols-1 md:grid-cols-2">
                             <Input
                                 className="w-full"
                                 label={'Project Title'}
@@ -49,32 +49,34 @@ const ProjectInfoForm = ({
                                 }
                             />
                         </div>
-                        <Input
-                            label={'Project Link'}
-                            placeholder="https://github.com/imnomee"
-                            type={'url'}
-                            value={project.projectLink || ''}
-                            onChange={(e) =>
-                                updateArrayItem(
-                                    index,
-                                    'projectLink',
-                                    e.target.value
-                                )
-                            }
-                        />
-                        <Input
-                            label={'Live Demo Link'}
-                            placeholder="http://nrportfolio.site"
-                            type={'url'}
-                            value={project.liveDemo || ''}
-                            onChange={(e) =>
-                                updateArrayItem(
-                                    index,
-                                    'liveDemo',
-                                    e.target.value
-                                )
-                            }
-                        />
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
+                            <Input
+                                label={'Project Link'}
+                                placeholder="https://github.com/imnomee"
+                                type={'url'}
+                                value={project.projectLink || ''}
+                                onChange={(e) =>
+                                    updateArrayItem(
+                                        index,
+                                        'projectLink',
+                                        e.target.value
+                                    )
+                                }
+                            />
+                            <Input
+                                label={'Live Demo Link'}
+                                placeholder="http://nrportfolio.site"
+                                type={'url'}
+                                value={project.liveDemo || ''}
+                                onChange={(e) =>
+                                    updateArrayItem(
+                                        index,
+                                        'liveDemo',
+                                        e.target.value
+                                    )
+                                }
+                            />
+                        </div>
                         {projectInfo.length > 1 && (
                             <button
                                 type="button"
