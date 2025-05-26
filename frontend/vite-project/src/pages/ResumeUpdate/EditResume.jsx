@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { useReactToPrint } from 'react-to-print';
 import {
@@ -19,16 +19,17 @@ import ProfileInfoForm from './ProfileInfoForm';
 import ContactInfoForm from './ContactInfoForm';
 import WorkExperienceForm from './WorkExperienceForm';
 import EducationDetailsForm from './EducationDetailsForm';
+import SkillsInfoForm from './SkillsInfoForm';
+import ProjectInfoForm from './ProjectInfoForm';
 
 const EditResume = () => {
     const { resumeId } = useParams();
-    const navigate = useNavigate();
     const resumeRef = useRef(null);
     const resumeDownloadRef = useRef(null);
     const [baseWidth, setBaseWidth] = useState(800);
     const [openThemeSelector, setOpenThemeSelector] = useState(false);
     const [openPreviewModal, setOpenPreviewModaal] = useState(false);
-    const [currentPage, setCurrentPage] = useState('work-experience');
+    const [currentPage, setCurrentPage] = useState('projects');
     const [progress, setProgress] = useState(0);
     const [resumeData, setResumeData] = useState({
         title: '',
@@ -160,6 +161,36 @@ const EditResume = () => {
                         }
                     />
                 );
+            case 'skills-info':
+                return (
+                    <SkillsInfoForm
+                        skillsInfo={resumeData?.skills}
+                        updateArrayItem={(index, key, value) =>
+                            updateArrayItem('skills', index, key, value)
+                        }
+                        addArrayItem={(newItem) =>
+                            addArrayItem('skills', newItem)
+                        }
+                        removeArrayItem={(index) =>
+                            removeArrayItem('skills', index)
+                        }
+                    />
+                );
+            case 'projects':
+                return (
+                    <ProjectInfoForm
+                        projectInfo={resumeData?.projects}
+                        updateArrayItem={(index, key, value) =>
+                            updateArrayItem('projects', index, key, value)
+                        }
+                        addArrayItem={(newItem) =>
+                            addArrayItem('projects', newItem)
+                        }
+                        removeArrayItem={(index) =>
+                            removeArrayItem('projects', index)
+                        }
+                    />
+                );
             default:
                 return null;
         }
@@ -184,8 +215,22 @@ const EditResume = () => {
             };
         });
     };
-    const addArrayItem = (section, newItem) => {};
-    const removeArrayItem = (section, index) => {};
+    const addArrayItem = (section, newItem) => {
+        setResumeData((prevState) => ({
+            ...prevState,
+            [section]: [...prevState[section], newItem],
+        }));
+    };
+    const removeArrayItem = (section, index) => {
+        setResumeData((prevState) => {
+            const updatedArray = [...prevState[section]];
+            updatedArray.splice(index, 1);
+            return {
+                ...prevState,
+                [section]: updatedArray,
+            };
+        });
+    };
     const uploadResumeImages = async () => {};
     const updateResumeDetails = async (thumbnailLink, profilePreviewUrl) => {};
     const handleDeleteResume = async () => {};
