@@ -1,0 +1,94 @@
+import React, { useEffect, useRef } from 'react';
+import {
+    LuMapPinHouse,
+    LuMail,
+    LuPhone,
+    LuRss,
+    LuGithub,
+    LuUser,
+} from 'react-icons/lu';
+import { RiLinksLine } from 'react-icons/ri';
+import Contactinfo from '../ResumeSections/Contactinfo';
+
+const DEFAULT_THEME = ['#ebfdff', '#a1f4fd', '#cefafe', '#d2b8db', '#4a5565'];
+
+const Title = ({ text, color }) => {
+    return (
+        <div className="relative w-fit mb-2.5">
+            <span
+                className="absolte bottom-0 left-0 w-full h-2"
+                style={{ backgroundColor: color }}></span>
+            <h2 className="relative text-sm font-bold">{text}</h2>
+        </div>
+    );
+};
+
+const TemplateOne = ({ resumeData, colorPalette, containerWidth }) => {
+    const themeColor = colorPalette?.length > 0 ? colorPalette : DEFAULT_THEME;
+    const resumeRef = useRef(null);
+    const [baseWidth, setBaseWidth] = React.useState(800);
+    const [scale, setScale] = React.useState(1);
+
+    useEffect(() => {
+        const actualBaseWidth = resumeRef.current.offsetWidth || 800;
+        setBaseWidth(actualBaseWidth);
+        setScale(containerWidth / baseWidth);
+    }, [containerWidth, baseWidth]);
+    return (
+        <div
+            ref={resumeRef}
+            className="p-3 bg-white "
+            style={{
+                transform: containerWidth > 0 ? `scale(${scale})` : 'none',
+                transformOrigin: 'top left',
+                width: containerWidth > 0 ? `${containerWidth}px` : '800px',
+                height: 'auto',
+            }}>
+            <div className="grid grid-cols-12 gap-8">
+                <div
+                    className="col-span-4 py-10"
+                    style={{ backgroundColor: themeColor[0] }}>
+                    <div className="flex flex-col items-center px-2">
+                        <div
+                            className="w-[100px] h-[100px] max-w-[110px] max-h-[110px] rounded-full flex items-ceneter justify-center"
+                            style={{ backgroundColor: themeColor[1] }}>
+                            {resumeData.profileInfo.profilePreviewUrl ? (
+                                <img
+                                    src={
+                                        resumeData.profileInfo.profilePreviewUrl
+                                    }
+                                    className="w-[90px] h-[90px] rounded-full"
+                                />
+                            ) : (
+                                <div
+                                    className="w-[90px] h-[90px] flex items-center justify-center text-5xl rounded-full"
+                                    style={{ color: themeColor[4] }}>
+                                    <LuUser />
+                                </div>
+                            )}
+                        </div>
+
+                        <h2 className="text-xl font-bold mt-3">
+                            {resumeData.profileInfo.fullName}
+                        </h2>
+                        <p className="text-sm text-center">
+                            {resumeData.profileInfo.designation}
+                        </p>
+                    </div>
+                    <div className="m-6">
+                        <div>
+                            <Contactinfo
+                                icon={<LuMapPinHouse />}
+                                iconBG={themeColor[2]}
+                                value={resumeData.contactInfo.location}
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div className="col-span-8 pt-10 mr-10 pb-5"></div>
+            </div>
+        </div>
+    );
+};
+
+export default TemplateOne;

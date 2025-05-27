@@ -23,6 +23,7 @@ import SkillsInfoForm from './SkillsInfoForm';
 import ProjectInfoForm from './ProjectInfoForm';
 import CertificationInfoForm from './CertificationInfoForm';
 import AdditionalInfoForm from './AdditionalInfoForm';
+import RenderResume from '../../components/ResumeTemplates/RenderResume';
 
 const EditResume = () => {
     const { resumeId } = useParams();
@@ -103,7 +104,6 @@ const EditResume = () => {
     });
     const [errorMsg, setErrorMsg] = useState('');
     const [isLoading, setIsLoading] = useState(false);
-
     const validateAndNext = () => {
         const errors = [];
         switch (currentPage) {
@@ -271,7 +271,6 @@ const EditResume = () => {
         setErrorMsg('');
         goToNextStep();
     };
-
     const goToNextStep = () => {
         const pages = [
             'profile-info',
@@ -518,7 +517,11 @@ const EditResume = () => {
         }
     };
 
-    const updateBaseWidth = () => {};
+    const updateBaseWidth = () => {
+        if (resumeRef.current) {
+            setBaseWidth(resumeRef.current.offsetWidth);
+        }
+    };
 
     useEffect(() => {
         updateBaseWidth();
@@ -613,6 +616,14 @@ const EditResume = () => {
                     </div>
                     <div ref={resumeRef} className="h-[100vh]">
                         {/* Resume Template */}
+                        <RenderResume
+                            templateId={resumeData?.template?.theme || ''}
+                            resumeData={resumeData}
+                            colorPalette={
+                                resumeData?.template?.colorPalette || []
+                            }
+                            containerWidth={baseWidth}
+                        />
                     </div>
                 </div>
             </div>
