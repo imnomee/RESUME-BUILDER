@@ -54,7 +54,7 @@ const SkillsInfoForm = ({
                         {skillsInfo.length > 1 && (
                             <button
                                 type="button"
-                                className="absolute top-3    right-3 text-sm text-red-600 hover:undelrine cursor-pointer "
+                                className="absolute top-3 right-3 text-sm text-red-600 hover:undelrine cursor-pointer"
                                 onClick={() => removeArrayItem(index)}>
                                 <LuTrash2 />
                             </button>

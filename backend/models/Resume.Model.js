@@ -68,7 +68,7 @@ const resumeSchema = new mongoose.Schema(
         languages: [
             {
                 name: String,
-                progressLeve: Number,
+                progressLevel: Number,
             },
         ],
         interests: [String],
