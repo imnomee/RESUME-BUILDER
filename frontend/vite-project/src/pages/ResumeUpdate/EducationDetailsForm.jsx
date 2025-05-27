@@ -34,7 +34,7 @@ const EducationDetailsForm = ({
                                 label={'Institution'}
                                 placeHolder={'XYZ University'}
                                 type={'text'}
-                                value={education.institution || ''}
+                                value={education.institutionName || ''}
                                 onChange={(e) =>
                                     updateArrayItem(
                                         index,

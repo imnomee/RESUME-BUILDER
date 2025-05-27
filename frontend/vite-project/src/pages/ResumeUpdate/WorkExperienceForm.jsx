@@ -24,7 +24,7 @@ const WorkExperienceForm = ({
                                     label="company"
                                     placeHolder={'ABC Corp'}
                                     type="text"
-                                    value={experience.company || ''}
+                                    value={experience.companyName || ''}
                                     onChange={(e) =>
                                         updateArrayItem(
                                             index,
