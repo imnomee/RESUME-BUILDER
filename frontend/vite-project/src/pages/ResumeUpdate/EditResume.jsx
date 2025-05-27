@@ -351,10 +351,10 @@ const EditResume = () => {
                                 key,
                                 value
                             );
-                            addArrayItem((newItem) =>
-                                addArrayItem('workExperience', newItem)
-                            );
                         }}
+                        addArrayItem={addArrayItem((newItem) =>
+                            addArrayItem('workExperience', newItem)
+                        )}
                         removeArrayItem={(index) =>
                             removeArrayItem('workExperience', index)
                         }

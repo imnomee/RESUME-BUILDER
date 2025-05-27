@@ -19,22 +19,22 @@ const WorkExperienceForm = ({
                         <div
                             key={index}
                             className="border border-gray-200/80 p-4 rounded-lg relative">
-                            <div className="gid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <Input
-                                    label="company"
+                                    label="Company"
                                     placeHolder={'ABC Corp'}
                                     type="text"
                                     value={experience.companyName || ''}
                                     onChange={(e) =>
                                         updateArrayItem(
                                             index,
-                                            'company',
+                                            'companyName',
                                             e.target.value
                                         )
                                     }
                                 />
                                 <Input
-                                    label={'ROle'}
+                                    label={'Role'}
                                     placeHolder={'Frontend Developer'}
                                     type={'text'}
                                     value={experience.role || ''}
