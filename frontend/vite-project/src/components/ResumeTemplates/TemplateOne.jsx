@@ -7,8 +7,10 @@ import {
     LuGithub,
     LuUser,
 } from 'react-icons/lu';
-import { RiLinksLine } from 'react-icons/ri';
+import { RiLinkedinLine } from 'react-icons/ri';
 import Contactinfo from '../ResumeSections/Contactinfo';
+import { formatYearMonth } from '../../utils/helper';
+import EducationInfo from '../ResumeSections/EducationInfo';
 
 const DEFAULT_THEME = ['#ebfdff', '#a1f4fd', '#cefafe', '#d2b8db', '#4a5565'];
 
@@ -76,12 +78,56 @@ const TemplateOne = ({ resumeData, colorPalette, containerWidth }) => {
                         </p>
                     </div>
                     <div className="m-6">
-                        <div>
+                        <div className="flex flex-col gap-2">
                             <Contactinfo
                                 icon={<LuMapPinHouse />}
                                 iconBG={themeColor[2]}
                                 value={resumeData.contactInfo.location}
                             />
+                            <Contactinfo
+                                icon={<LuMail />}
+                                iconBG={themeColor[2]}
+                                value={resumeData.contactInfo.email}
+                            />
+                            <Contactinfo
+                                icon={<LuPhone />}
+                                iconBG={themeColor[2]}
+                                value={resumeData.contactInfo.phone}
+                            />
+                            {resumeData.contactInfo.linkedIn && (
+                                <Contactinfo
+                                    icon={<RiLinkedinLine />}
+                                    iconBG={themeColor[2]}
+                                    value={resumeData.contactInfo.linkedIn}
+                                />
+                            )}
+                            {resumeData.contactInfo.github && (
+                                <Contactinfo
+                                    icon={<LuGithub />}
+                                    iconBG={themeColor[2]}
+                                    value={resumeData.contactInfo.github}
+                                />
+                            )}
+                            {resumeData.contactInfo.website && (
+                                <Contactinfo
+                                    icon={<LuRss />}
+                                    iconBG={themeColor[2]}
+                                    value={resumeData.contactInfo.website}
+                                />
+                            )}
+                        </div>
+                        <div className="mt-5">
+                            <Title text={'Education'} color={themeColor[1]} />
+                            {resumeData.education.map((data, index) => (
+                                <EducationInfo
+                                    key={`education_${index}`}
+                                    degree={data.degree}
+                                    institutionName={data.institutionName}
+                                    duration={`${formatYearMonth(
+                                        data.startDate
+                                    )} - ${formatYearMonth(data.endDate)}`}
+                                />
+                            ))}
                         </div>
                     </div>
                 </div>
