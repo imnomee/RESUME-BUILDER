@@ -198,11 +198,11 @@ const EditResume = () => {
                 break;
             case 'skills-info':
                 resumeData.skills.forEach((item, index) => {
-                    const { skillName, progress } = item;
+                    const { skillName, progressLevel } = item;
                     if (!skillName.trim()) {
                         errors.push(`Name is required in skill ${index + 1}`);
                     }
-                    if (progress < 1 || progress > 100) {
+                    if (progressLevel < 1 || progressLevel > 100) {
                         errors.push(
                             `Progress must be betwen 1-100 in skill ${
                                 index + 1

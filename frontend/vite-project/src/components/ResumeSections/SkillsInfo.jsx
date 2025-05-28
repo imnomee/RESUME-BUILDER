@@ -19,11 +19,11 @@ const Skill = ({ skill, progress, accentColor, bgColor }) => {
 const SkillsInfo = ({ skills, accentColor, bgColor }) => {
     return (
         <div className="grid grid-cols-2 gap-x-5 gap-y-1 mb-5">
-            {skills?.map((skill, index) => (
+            {skills.map((_, index) => (
                 <Skill
                     key={index}
-                    skill={skill.skillName}
-                    progress={skill.progressLevel}
+                    skill={_.skillName}
+                    progress={_.progressLevel}
                     accentColor={accentColor}
                     bgColor={bgColor}
                 />

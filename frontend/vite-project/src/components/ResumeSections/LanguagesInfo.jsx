@@ -19,11 +19,11 @@ const Language = ({ name, progress, accentColor, bgColor }) => {
 const LanguagesInfo = ({ languages, accentColor, bgColor }) => {
     return (
         <div className="flex flex-col gap-2">
-            {languages.map((lang, index) => (
+            {languages.map((_, index) => (
                 <Language
                     key={index}
-                    name={lang.name}
-                    progress={lang.progressLevel}
+                    name={_.name}
+                    progress={_.progressLevel}
                     accentColor={accentColor}
                     bgColor={bgColor}
                 />
