@@ -32,7 +32,7 @@ const EditResume = () => {
     const [baseWidth, setBaseWidth] = useState(800);
     const [openThemeSelector, setOpenThemeSelector] = useState(false);
     const [openPreviewModal, setOpenPreviewModaal] = useState(false);
-    const [currentPage, setCurrentPage] = useState('additionalInfo');
+    const [currentPage, setCurrentPage] = useState('profile-info');
     const [progress, setProgress] = useState(0);
     const [resumeData, setResumeData] = useState({
         title: '',
@@ -58,7 +58,7 @@ const EditResume = () => {
         },
         workExperience: [
             {
-                company: '',
+                companyName: '',
                 role: '',
                 startDate: '',
                 endDate: '',
@@ -352,9 +352,9 @@ const EditResume = () => {
                                 value
                             );
                         }}
-                        addArrayItem={addArrayItem((newItem) =>
+                        addArrayItem={(newItem) =>
                             addArrayItem('workExperience', newItem)
-                        )}
+                        }
                         removeArrayItem={(index) =>
                             removeArrayItem('workExperience', index)
                         }

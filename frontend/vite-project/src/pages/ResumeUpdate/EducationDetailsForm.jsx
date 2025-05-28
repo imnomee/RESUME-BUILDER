@@ -46,7 +46,16 @@ const EducationDetailsForm = ({
                             <Input
                                 label={'Start Date'}
                                 type={'month'}
-                                value={education.startDate || ''}
+                                value={
+                                    education.startDate
+                                        ? new Date(
+                                              education.startDate
+                                          ).toLocaleDateString('en-CA', {
+                                              year: 'numeric',
+                                              month: '2-digit',
+                                          })
+                                        : ''
+                                }
                                 onChange={(e) =>
                                     updateArrayItem(
                                         index,
@@ -58,7 +67,16 @@ const EducationDetailsForm = ({
                             <Input
                                 label={'End Date'}
                                 type={'month'}
-                                value={education.endDate || ''}
+                                value={
+                                    education.startDate
+                                        ? new Date(
+                                              education.startDate
+                                          ).toLocaleDateString('en-CA', {
+                                              year: 'numeric',
+                                              month: '2-digit',
+                                          })
+                                        : ''
+                                }
                                 onChange={(e) =>
                                     updateArrayItem(
                                         index,

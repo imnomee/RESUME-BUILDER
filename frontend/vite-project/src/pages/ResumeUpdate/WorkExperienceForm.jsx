@@ -13,6 +13,7 @@ const WorkExperienceForm = ({
             <h2 className="text-lg font-semibold text-gray-900">
                 Work Experience
             </h2>
+
             <div className="mt-4 flex flex-col gap-4 mb-3">
                 {workExperience.map((experience, index) => {
                     return (
@@ -49,7 +50,16 @@ const WorkExperienceForm = ({
                                 <Input
                                     label={'Start Date'}
                                     type={'month'}
-                                    value={experience.startDate || ''}
+                                    value={
+                                        experience.startDate
+                                            ? new Date(
+                                                  experience.startDate
+                                              ).toLocaleDateString('en-CA', {
+                                                  year: 'numeric',
+                                                  month: '2-digit',
+                                              })
+                                            : ''
+                                    }
                                     onChange={(e) =>
                                         updateArrayItem(
                                             index,
@@ -61,7 +71,16 @@ const WorkExperienceForm = ({
                                 <Input
                                     label={'End Date'}
                                     type={'month'}
-                                    value={experience.endDate || ''}
+                                    value={
+                                        experience.endDate
+                                            ? new Date(
+                                                  experience.endDate
+                                              ).toLocaleDateString('en-CA', {
+                                                  year: 'numeric',
+                                                  month: '2-digit',
+                                              })
+                                            : ''
+                                    }
                                     onChange={(e) =>
                                         updateArrayItem(
                                             index,
@@ -105,7 +124,7 @@ const WorkExperienceForm = ({
                     className="self-start flex items-center gap-2 px-4 py-2 rounded bg-purple-100 text-purple-600 text-sm font-medium hover:bg-purple-200 cursor-pointer"
                     onClick={() =>
                         addArrayItem({
-                            company: '',
+                            companyName: '',
                             role: '',
                             startDate: '',
                             endDate: '',
