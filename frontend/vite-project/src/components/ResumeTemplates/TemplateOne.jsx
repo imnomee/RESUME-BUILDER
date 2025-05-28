@@ -12,6 +12,7 @@ import Contactinfo from '../ResumeSections/Contactinfo';
 import { formatYearMonth } from '../../utils/helper';
 import EducationInfo from '../ResumeSections/EducationInfo';
 import LanguagesInfo from '../ResumeSections/LanguagesInfo';
+import WorkExperienceInfo from '../ResumeSections/WorkExperienceInfo';
 
 const DEFAULT_THEME = ['#ebfdff', '#a1f4fd', '#cefafe', '#d2b8db', '#4a5565'];
 
@@ -19,7 +20,7 @@ const Title = ({ text, color }) => {
     return (
         <div className="relative w-fit mb-2.5">
             <span
-                className="absolte bottom-0 left-0 w-full h-2"
+                className="absolute bottom-0 left-0 w-full h-2"
                 style={{ backgroundColor: color }}></span>
             <h2 className="relative text-sm font-bold">{text}</h2>
         </div>
@@ -140,7 +141,44 @@ const TemplateOne = ({ resumeData, colorPalette, containerWidth }) => {
                         </div>
                     </div>
                 </div>
-                <div className="col-span-8 pt-10 mr-10 pb-5"></div>
+                <div className="col-span-8 pt-10 mr-10 pb-5">
+                    <div>
+                        <Title
+                            text={'Professional Summary'}
+                            color={themeColor[1]}
+                        />
+                        <p className="text-sm font-medium">
+                            {resumeData.profileInfo.summary}
+                        </p>
+                    </div>
+                    <div className="mt-4">
+                        <Title text={'Work Experience'} color={themeColor[1]} />
+                        {resumeData.workExperience.map((data, index) => (
+                            <WorkExperienceInfo
+                                key={index}
+                                company={data.companyName}
+                                role={data.role}
+                                duration={`${formatYearMonth(
+                                    data.startDate
+                                )} - ${formatYearMonth(data.endDate)}`}
+                                durationColor={themeColor[4]}
+                                description={data.description}
+                            />
+                        ))}
+                    </div>
+                    <div className="mt-4">
+                        <Title text={'Projects'} color={themeColor[1]} />
+                        {resumeData.projects.map((project, index) => (
+                            <ProjectsInfo
+                                key={index}
+                                name={project.projectName}
+                                description={project.description}
+                                link={project.projectLink}
+                                demo={project.liveDemo}
+                            />
+                        ))}
+                    </div>
+                </div>
             </div>
         </div>
     );

@@ -26,7 +26,7 @@ const SkillsInfoForm = ({
                                 onChange={(e) =>
                                     updateArrayItem(
                                         index,
-                                        'name',
+                                        'skillName',
                                         e.target.value
                                     )
                                 }
@@ -43,7 +43,7 @@ const SkillsInfoForm = ({
                                         onChange={(newValue) =>
                                             updateArrayItem(
                                                 index,
-                                                'progress',
+                                                'progressLevel',
                                                 newValue
                                             )
                                         }

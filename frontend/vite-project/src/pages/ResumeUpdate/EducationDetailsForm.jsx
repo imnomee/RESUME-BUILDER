@@ -48,12 +48,13 @@ const EducationDetailsForm = ({
                                 type={'month'}
                                 value={
                                     education.startDate
-                                        ? new Date(
-                                              education.startDate
-                                          ).toLocaleDateString('en-CA', {
-                                              year: 'numeric',
-                                              month: '2-digit',
-                                          })
+                                        ? new Date(education.startDate).toLocaleDateString(
+                                              'en-CA',
+                                              {
+                                                  year: 'numeric',
+                                                  month: '2-digit',
+                                              }
+                                          )
                                         : ''
                                 }
                                 onChange={(e) =>
@@ -68,13 +69,14 @@ const EducationDetailsForm = ({
                                 label={'End Date'}
                                 type={'month'}
                                 value={
-                                    education.startDate
-                                        ? new Date(
-                                              education.startDate
-                                          ).toLocaleDateString('en-CA', {
-                                              year: 'numeric',
-                                              month: '2-digit',
-                                          })
+                                    education.endDate
+                                        ? new Date(education.endDate).toLocaleDateString(
+                                              'en-CA',
+                                              {
+                                                  year: 'numeric',
+                                                  month: '2-digit',
+                                              }
+                                          )
                                         : ''
                                 }
                                 onChange={(e) =>
