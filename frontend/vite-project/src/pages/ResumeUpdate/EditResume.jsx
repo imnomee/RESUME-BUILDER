@@ -328,7 +328,7 @@ const EditResume = () => {
                         updateSection={(key, value) =>
                             updateSection('profileInfo', key, value)
                         }
-                        onNext={validateAndNext}
+                        // onNext={validateAndNext}
                     />
                 );
             case 'contact-info':

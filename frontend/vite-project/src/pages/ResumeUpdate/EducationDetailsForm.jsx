@@ -38,7 +38,7 @@ const EducationDetailsForm = ({
                                 onChange={(e) =>
                                     updateArrayItem(
                                         index,
-                                        'institution',
+                                        'institutionName',
                                         e.target.value
                                     )
                                 }
@@ -90,7 +90,7 @@ const EducationDetailsForm = ({
                             <button
                                 type="button"
                                 className=" absolute top-3 right-3 text-sm text-red-600 hover:underline cursor-pointer"
-                                onClick={removeArrayItem(index)}>
+                                onClick={() => removeArrayItem(index)}>
                                 <LuTrash2 />
                             </button>
                         )}
@@ -102,7 +102,7 @@ const EducationDetailsForm = ({
                     onClick={() =>
                         addArrayItem({
                             degree: '',
-                            institution: '',
+                            institutionName: '',
                             startDate: '',
                             endDate: '',
                         })

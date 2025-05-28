@@ -17,7 +17,6 @@ const Language = ({ name, progress, accentColor, bgColor }) => {
 };
 
 const LanguagesInfo = ({ languages, accentColor, bgColor }) => {
-    console.log(languages);
     return (
         <div className="flex flex-col gap-2">
             {languages.map((lang, index) => (

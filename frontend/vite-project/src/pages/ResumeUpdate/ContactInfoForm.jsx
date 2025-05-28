@@ -37,8 +37,8 @@ const ContactInfoForm = ({ contactInfo, updateSection }) => {
                     label="LinkedIn"
                     placeHolder="https://linkedin.com/in/imnomee"
                     type="text"
-                    value={contactInfo.linkedin || ''}
-                    onChange={(e) => updateSection('linkedin', e.target.value)}
+                    value={contactInfo.linkedIn || ''}
+                    onChange={(e) => updateSection('linkedIn', e.target.value)}
                 />
                 <Input
                     label="Github"
@@ -52,7 +52,7 @@ const ContactInfoForm = ({ contactInfo, updateSection }) => {
                         label="Portfolio / Website"
                         placeHolder="https://nrportfolio.site"
                         type="text"
-                        value={contactInfo.portfolio || ''}
+                        value={contactInfo.website || ''}
                         onChange={(e) =>
                             updateSection('website', e.target.value)
                         }
