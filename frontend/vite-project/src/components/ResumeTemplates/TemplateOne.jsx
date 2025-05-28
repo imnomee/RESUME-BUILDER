@@ -13,6 +13,7 @@ import { formatYearMonth } from '../../utils/helper';
 import EducationInfo from '../ResumeSections/EducationInfo';
 import LanguagesInfo from '../ResumeSections/LanguagesInfo';
 import WorkExperienceInfo from '../ResumeSections/WorkExperienceInfo';
+import ProjectsInfo from '../ResumeSections/ProjectsInfo';
 
 const DEFAULT_THEME = ['#ebfdff', '#a1f4fd', '#cefafe', '#d2b8db', '#4a5565'];
 
@@ -175,6 +176,7 @@ const TemplateOne = ({ resumeData, colorPalette, containerWidth }) => {
                                 description={project.description}
                                 link={project.projectLink}
                                 demo={project.liveDemo}
+                                bgColor={themeColor[2]}
                             />
                         ))}
                     </div>
