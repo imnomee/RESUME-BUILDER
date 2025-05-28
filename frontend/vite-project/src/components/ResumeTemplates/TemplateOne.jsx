@@ -14,6 +14,7 @@ import EducationInfo from '../ResumeSections/EducationInfo';
 import LanguagesInfo from '../ResumeSections/LanguagesInfo';
 import WorkExperienceInfo from '../ResumeSections/WorkExperienceInfo';
 import ProjectsInfo from '../ResumeSections/ProjectsInfo';
+import SkillsInfo from '../ResumeSections/SkillsInfo';
 
 const DEFAULT_THEME = ['#ebfdff', '#a1f4fd', '#cefafe', '#d2b8db', '#4a5565'];
 
@@ -179,6 +180,14 @@ const TemplateOne = ({ resumeData, colorPalette, containerWidth }) => {
                                 bgColor={themeColor[2]}
                             />
                         ))}
+                    </div>
+                    <div className="">
+                        <Title text={'Skills'} color={themeColor[1]} />
+                        <SkillsInfo
+                            skills={resumeData.skills}
+                            accentColor={themeColor[3]}
+                            bgColor={themeColor[2]}
+                        />
                     </div>
                 </div>
             </div>
