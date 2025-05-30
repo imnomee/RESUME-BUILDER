@@ -68,22 +68,22 @@ const EditResume = () => {
         education: [
             {
                 degree: '',
-                institution: '',
+                institutionName: '',
                 startDate: '',
                 endDate: '',
             },
         ],
         skills: [
             {
-                name: '',
-                progress: 0,
+                skillName: '',
+                progressLevel: 0,
             },
         ],
         projects: [
             {
-                title: '',
+                projectName: '',
                 description: '',
-                github: '',
+                projectLink: '',
                 liveDemo: '',
             },
         ],
@@ -97,7 +97,7 @@ const EditResume = () => {
         languages: [
             {
                 name: '',
-                pgoress: 0,
+                progressLevel: 0,
             },
         ],
         interests: [''],
@@ -197,8 +197,8 @@ const EditResume = () => {
                 });
                 break;
             case 'skills-info':
-                resumeData.skills.forEach((item, index) => {
-                    const { skillName, progressLevel } = item;
+                resumeData.skills.forEach((skill, index) => {
+                    const { skillName, progressLevel } = skill;
                     if (!skillName.trim()) {
                         errors.push(`Name is required in skill ${index + 1}`);
                     }
@@ -227,8 +227,8 @@ const EditResume = () => {
                 });
                 break;
             case 'certification':
-                resumeData.certifications.forEach((item, index) => {
-                    const { title, issuer, year } = item;
+                resumeData.certifications.forEach((cert, index) => {
+                    const { title, issuer, year } = cert;
                     if (!title.trim()) {
                         errors.push(
                             `Title is required in certification ${index + 1}`
