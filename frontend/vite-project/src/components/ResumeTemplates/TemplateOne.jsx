@@ -15,7 +15,6 @@ import LanguagesInfo from '../ResumeSections/LanguagesInfo';
 import WorkExperienceInfo from '../ResumeSections/WorkExperienceInfo';
 import ProjectsInfo from '../ResumeSections/ProjectsInfo';
 import SkillsInfo from '../ResumeSections/SkillsInfo';
-import InterestsInfo from '../ResumeSections/InterestsInfo';
 import CertificationInfo from '../ResumeSections/CertificationInfo';
 
 const DEFAULT_THEME = ['#ebfdff', '#a1f4fd', '#cefafe', '#d2b8db', '#4a5565'];
@@ -205,9 +204,33 @@ const TemplateOne = ({ resumeData, colorPalette, containerWidth }) => {
                             ))}
                         </div>
                     </div>
-                    <div className="mt-5">
-                        <Title text={'Interests'} color={themeColor[1]} />
-                    </div>
+                    {resumeData.interests.length > 0 &&
+                        resumeData.interests[0] !== '' && (
+                            <div className="mt-5">
+                                <Title
+                                    text={'Interests'}
+                                    color={themeColor[1]}
+                                />
+                                <div className="flex items-center flex-wrap gap-3 mt-4">
+                                    {resumeData.interests.map(
+                                        (interest, index) => {
+                                            if (!interest) return null;
+                                            return (
+                                                <div
+                                                    key={index}
+                                                    className="text-[10px] font-medium py-1 px-3 rounded-lg"
+                                                    style={{
+                                                        backgroundColor:
+                                                            themeColor[2],
+                                                    }}>
+                                                    {interest}
+                                                </div>
+                                            );
+                                        }
+                                    )}
+                                </div>
+                            </div>
+                        )}
                 </div>
             </div>
         </div>
