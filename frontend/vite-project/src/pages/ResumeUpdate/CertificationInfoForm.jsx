@@ -15,7 +15,7 @@ const CertificationInfoForm = ({
                 Certifications
             </h2>
             <div className="mt-4 flex flex-col gap-4 mb-3">
-                {certificationInfo.map((certification, index) => (
+                {certificationInfo.map((cert, index) => (
                     <div
                         key={index}
                         className="border border-gray-200/80 p-4 rounded-lg relative">
@@ -24,7 +24,7 @@ const CertificationInfoForm = ({
                                 label={'Certification Title'}
                                 placeHolder={'Full Stack Web Developer'}
                                 type={'text'}
-                                value={certification.title}
+                                value={cert.title}
                                 onChange={(e) =>
                                     updateArrayItem(
                                         index,
@@ -37,7 +37,7 @@ const CertificationInfoForm = ({
                                 label="Issuer"
                                 placeHolder={'Coursera / Google /etc.'}
                                 type={'text'}
-                                value={certification.issuer}
+                                value={cert.issuer}
                                 onChange={(e) =>
                                     updateArrayItem(
                                         index,
@@ -50,7 +50,7 @@ const CertificationInfoForm = ({
                                 label="Year"
                                 placeholder="2024"
                                 type="text"
-                                value={certification.year || ''}
+                                value={cert.year || ''}
                                 onChange={(e) =>
                                     updateArrayItem(
                                         index,
@@ -73,7 +73,13 @@ const CertificationInfoForm = ({
                 <button
                     type="button"
                     className="self-start flex items-center gap-2 px-4 py-2 rounded bg-purple-100 text-purple-800 text-sm font-medium hover:bg-purple-200 cursor-pointer"
-                    onClick={() => addArrayItem({ name: '', progress: 0 })}>
+                    onClick={() =>
+                        addArrayItem({
+                            title: '',
+                            issuer: '',
+                            year: '',
+                        })
+                    }>
                     <LuPlus /> Add Certification
                 </button>
             </div>
