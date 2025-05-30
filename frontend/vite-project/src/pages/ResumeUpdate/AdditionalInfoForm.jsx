@@ -5,10 +5,13 @@ import RatingInput from '../../components/ResumeSections/RatingInput';
 
 const AdditionalInfoForm = ({
     languages,
+    updateLanguage,
+    addLanguage,
+    removeLanguage,
     interests,
-    updateArrayItem,
-    addArrayItem,
-    removeArrayItem,
+    updateInterest,
+    addInterest,
+    removeInterest,
 }) => {
     return (
         <div className="px-5 pt-5">
@@ -30,8 +33,7 @@ const AdditionalInfoForm = ({
                                     placeHolder={'e.g. English'}
                                     value={lang.name || ''}
                                     onChange={(e) =>
-                                        updateArrayItem(
-                                            'languages',
+                                        updateLanguage(
                                             index,
                                             'name',
                                             e.target.value
@@ -45,8 +47,7 @@ const AdditionalInfoForm = ({
                                     <RatingInput
                                         value={lang.progressLevel || 0}
                                         onChange={(value) =>
-                                            updateArrayItem(
-                                                'languages',
+                                            updateLanguage(
                                                 index,
                                                 'progressLevel',
                                                 value
@@ -62,9 +63,7 @@ const AdditionalInfoForm = ({
                                 <button
                                     type="button"
                                     className="absolute top-3 right-3 text-sm text-red-600 hover:undelrine cursor-pointer"
-                                    onClick={() =>
-                                        removeArrayItem('languages', index)
-                                    }>
+                                    onClick={() => removeLanguage(index)}>
                                     <LuTrash2 />
                                 </button>
                             )}
@@ -73,7 +72,9 @@ const AdditionalInfoForm = ({
                     <button
                         type="button"
                         className="self-start flex items-center gap-2 px-4 py-2 rounded bg-purple-100 text-purple-800 text-sm font-medium hover:bg-purple-200 cursor-pointer"
-                        onClick={() => addArrayItem({ name: '', progress: 0 })}>
+                        onClick={() =>
+                            addLanguage({ name: '', progressLevel: 0 })
+                        }>
                         <LuPlus /> Add Language
                     </button>
                 </div>
@@ -89,21 +90,14 @@ const AdditionalInfoForm = ({
                                 placeHolder={'e.g. Reading'}
                                 value={interest || ''}
                                 onChange={(e) =>
-                                    updateArrayItem(
-                                        'interests',
-                                        index,
-                                        null,
-                                        e.target.value
-                                    )
+                                    updateInterest(index, null, e.target.value)
                                 }
                             />
                             {interests.length > 1 && (
                                 <button
                                     type="button"
                                     className="absolute top-6.5 right-3 text-sm text-red-600 hover:undelrine cursor-pointer"
-                                    onClick={() =>
-                                        removeArrayItem('interests', index)
-                                    }>
+                                    onClick={() => removeInterest(index)}>
                                     <LuTrash2 />
                                 </button>
                             )}
@@ -112,7 +106,7 @@ const AdditionalInfoForm = ({
                     <button
                         type="button"
                         className="self-start flex items-center gap-2 px-4 py-2 rounded bg-purple-100 text-purple-800 text-sm font-medium hover:bg-purple-200 cursor-pointer"
-                        onClick={() => addArrayItem('interests', '')}>
+                        onClick={() => addInterest('')}>
                         <LuPlus /> Add Interest
                     </button>
                 </div>

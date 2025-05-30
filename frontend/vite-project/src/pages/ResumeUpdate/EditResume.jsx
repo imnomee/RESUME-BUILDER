@@ -247,12 +247,21 @@ const EditResume = () => {
                 });
                 break;
             case 'additionalInfo':
-                if (
-                    resumeData.languages.length === 0 ||
-                    !resumeData.languages[0].name.trim()
-                ) {
-                    errors.push('At least one language is required');
-                }
+                resumeData.languages.forEach((lang, index) => {
+                    const { name, progressLevel } = lang;
+                    if (!name.trim()) {
+                        errors.push(
+                            `Language is required in skill ${index + 1}`
+                        );
+                    }
+                    if (progressLevel < 1 || progressLevel > 100) {
+                        errors.push(
+                            `Progress must be betwen 1-100 in skill ${
+                                index + 1
+                            }`
+                        );
+                    }
+                });
 
                 if (
                     resumeData.interests.length === 0 ||
@@ -424,15 +433,24 @@ const EditResume = () => {
                 return (
                     <AdditionalInfoForm
                         languages={resumeData?.languages}
+                        updateLanguage={(index, key, value) =>
+                            updateArrayItem('languages', index, key, value)
+                        }
+                        addLanguage={(newItem) =>
+                            addArrayItem('languages', newItem)
+                        }
+                        removeLanguage={(index) =>
+                            removeArrayItem('languages', index)
+                        }
                         interests={resumeData?.interests}
-                        updateArrayItem={(section, index, key, value) =>
-                            updateArrayItem(section, index, key, value)
+                        updateInterest={(index, key, value) =>
+                            updateArrayItem('interests', index, key, value)
                         }
-                        addArrayItem={(section, newItem) =>
-                            addArrayItem(section, newItem)
+                        addInterest={(newItem) =>
+                            addArrayItem('interests', newItem)
                         }
-                        removeArrayItem={(section, index) =>
-                            removeArrayItem(section, index)
+                        removeInterest={(index) =>
+                            removeArrayItem('interests', index)
                         }
                     />
                 );
