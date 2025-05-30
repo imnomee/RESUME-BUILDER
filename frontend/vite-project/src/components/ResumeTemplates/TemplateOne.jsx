@@ -15,6 +15,8 @@ import LanguagesInfo from '../ResumeSections/LanguagesInfo';
 import WorkExperienceInfo from '../ResumeSections/WorkExperienceInfo';
 import ProjectsInfo from '../ResumeSections/ProjectsInfo';
 import SkillsInfo from '../ResumeSections/SkillsInfo';
+import InterestsInfo from '../ResumeSections/InterestsInfo';
+import CertificationInfo from '../ResumeSections/CertificationInfo';
 
 const DEFAULT_THEME = ['#ebfdff', '#a1f4fd', '#cefafe', '#d2b8db', '#4a5565'];
 
@@ -188,6 +190,23 @@ const TemplateOne = ({ resumeData, colorPalette, containerWidth }) => {
                             accentColor={themeColor[3]}
                             bgColor={themeColor[2]}
                         />
+                    </div>
+                    <div className="mt-5">
+                        <Title text={'Certifications'} color={themeColor[1]} />
+                        <div className="grid grid-cols-2 gap-2">
+                            {resumeData.certifications.map((cert, index) => (
+                                <CertificationInfo
+                                    key={index}
+                                    title={cert.title}
+                                    issuer={cert.issuer}
+                                    year={cert.year}
+                                    bgColor={themeColor[2]}
+                                />
+                            ))}
+                        </div>
+                    </div>
+                    <div className="mt-5">
+                        <Title text={'Interests'} color={themeColor[1]} />
                     </div>
                 </div>
             </div>
