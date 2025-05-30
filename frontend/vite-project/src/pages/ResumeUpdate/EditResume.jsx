@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { useReactToPrint } from 'react-to-print';
@@ -24,6 +24,7 @@ import ProjectInfoForm from './ProjectInfoForm';
 import CertificationInfoForm from './CertificationInfoForm';
 import AdditionalInfoForm from './AdditionalInfoForm';
 import RenderResume from '../../components/ResumeTemplates/RenderResume';
+import newResume from '../../utils/newResume';
 
 const EditResume = () => {
     const { resumeId } = useParams();
@@ -34,74 +35,7 @@ const EditResume = () => {
     const [openPreviewModal, setOpenPreviewModaal] = useState(false);
     const [currentPage, setCurrentPage] = useState('profile-info');
     const [progress, setProgress] = useState(0);
-    const [resumeData, setResumeData] = useState({
-        title: '',
-        thumbnailLink: '',
-        profileInfo: {
-            profileImg: null,
-            profilePreviewUrl: '',
-            fullName: '',
-            designation: '',
-            summary: '',
-        },
-        template: {
-            theme: '',
-            colorPalette: '',
-        },
-        contactInfo: {
-            email: '',
-            phone: '',
-            location: '',
-            linkedIn: '',
-            github: '',
-            website: '',
-        },
-        workExperience: [
-            {
-                companyName: '',
-                role: '',
-                startDate: '',
-                endDate: '',
-                description: '',
-            },
-        ],
-        education: [
-            {
-                degree: '',
-                institutionName: '',
-                startDate: '',
-                endDate: '',
-            },
-        ],
-        skills: [
-            {
-                skillName: '',
-                progressLevel: 0,
-            },
-        ],
-        projects: [
-            {
-                projectName: '',
-                description: '',
-                projectLink: '',
-                liveDemo: '',
-            },
-        ],
-        certifications: [
-            {
-                title: '',
-                issuer: '',
-                year: '',
-            },
-        ],
-        languages: [
-            {
-                name: '',
-                progressLevel: 0,
-            },
-        ],
-        interests: [''],
-    });
+    const [resumeData, setResumeData] = useState(newResume);
     const [errorMsg, setErrorMsg] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const validateAndNext = () => {
