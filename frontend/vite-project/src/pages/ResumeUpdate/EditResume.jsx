@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { useReactToPrint } from 'react-to-print';
 import {
@@ -11,10 +11,8 @@ import {
     LuTrash2,
 } from 'react-icons/lu';
 import DashboardLayout from '../../components/layouts/DashboardLayout';
-import TitleInput from '../../components/inputs/TitleInput';
 import axiosInstance from '../../utils/axiosInstance';
 import { API_PATHS } from '../../utils/apiPaths';
-import StepProgress from '../../components/StepProgress';
 import ProfileInfoForm from './ProfileInfoForm';
 import ContactInfoForm from './ContactInfoForm';
 import WorkExperienceForm from './WorkExperienceForm';
@@ -25,8 +23,18 @@ import CertificationInfoForm from './CertificationInfoForm';
 import AdditionalInfoForm from './AdditionalInfoForm';
 import RenderResume from '../../components/ResumeTemplates/RenderResume';
 import newResume from '../../utils/newResume';
+import TitleInput from '../../components/inputs/TitleInput';
+import {
+    captureElementAsImage,
+    dataURLtoFile,
+    fixTailwindColors,
+} from '../../utils/helper';
+import StepProgress from '../../components/StepProgress';
+import ThemeSelector from './ThemeSelector';
+import Modal from '../../components/Modal';
 
 const EditResume = () => {
+    const navigate = useNavigate();
     const { resumeId } = useParams();
     const resumeRef = useRef(null);
     const resumeDownloadRef = useRef(null);
@@ -428,8 +436,66 @@ const EditResume = () => {
             };
         });
     };
-    const uploadResumeImages = async () => {};
-    const updateResumeDetails = async (thumbnailLink, profilePreviewUrl) => {};
+    const uploadResumeImages = async () => {
+        try {
+            setIsLoading(true);
+            fixTailwindColors(resumeRef.current);
+            const imageDataUrl = await captureElementAsImage(resumeRef.current);
+            const thumbnailFile = dataURLtoFile(
+                imageDataUrl,
+                `resume-${resumeId}.png`
+            );
+            const profileImageFile =
+                resumeData?.profileInfo?.profileImg || null;
+
+            const formData = new FormData();
+            if (profileImageFile)
+                formData.append('profileImage', profileImageFile);
+            if (thumbnailFile) formData.append('thumbnail', thumbnailFile);
+
+            const uploadResponse = await axiosInstance.put(
+                API_PATHS.RESUME.UPLOAD_IMAGES(resumeId),
+                formData,
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                }
+            );
+
+            const { thumbnailLink, profilePreviewUrl } = uploadResponse.data;
+            console.log('resume_data', resumeData);
+            await updateResumeDetails(thumbnailLink, profilePreviewUrl);
+            toast.success('Resume Updated Success');
+            navigate('/dashboard');
+        } catch (error) {
+            console.error(error);
+            toast.error('Faile dto upload images');
+        } finally {
+            setIsLoading(false);
+        }
+    };
+    const updateResumeDetails = async (thumbnailLink, profilePreviewUrl) => {
+        try {
+            setIsLoading(true);
+            const response = await axiosInstance.put(
+                API_PATHS.RESUME.UPDATE(resumeId),
+                {
+                    ...resumeData,
+                    thumbnailLink: thumbnailLink || '',
+                    profileInfo: {
+                        ...resumeData.profileInfo,
+                        profilePreviewUrl: profilePreviewUrl || '',
+                    },
+                }
+            );
+        } catch (error) {
+            console.error(error);
+            toast.error(error);
+        } finally {
+            setIsLoading(false);
+        }
+    };
     const handleDeleteResume = async () => {};
     const reactToPrintFn = useReactToPrint({
         contentRef: resumeDownloadRef,
@@ -579,6 +645,24 @@ const EditResume = () => {
                     </div>
                 </div>
             </div>
+            <Modal
+                isOpen={openThemeSelector}
+                onClose={() => setOpenThemeSelector(false)}
+                title={'Change Theme'}>
+                <div className="w-[90vw] h-[80vw]">
+                    <ThemeSelector
+                        selectedTheme={resumeData?.template}
+                        setSelectedTheme={(value) =>
+                            setResumeData((prevState) => ({
+                                ...prevState,
+                                template: value || prevState.template,
+                            }))
+                        }
+                        resumeData={null}
+                        onClose={() => setOpenThemeSelector(false)}
+                    />
+                </div>
+            </Modal>
         </DashboardLayout>
     );
 };
