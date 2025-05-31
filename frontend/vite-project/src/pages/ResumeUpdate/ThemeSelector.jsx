@@ -58,7 +58,7 @@ const ThemeSelector = ({
     const handleThemeSelection = () => {
         setSelectedTheme({
             colorPalette: selectedColorPalette?.colors,
-            theme: selectedTheme?.theme,
+            theme: selectedTemplate?.theme,
         });
         onClose();
     };
