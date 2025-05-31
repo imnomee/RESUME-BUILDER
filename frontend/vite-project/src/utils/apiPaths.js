@@ -13,7 +13,8 @@ export const API_PATHS = {
         CREATE: `${BASE_URL}/resumes`,
         UPDATE: (resumeId) => `${BASE_URL}/resumes/${resumeId}`,
         DELETE: (resumeId) => `${BASE_URL}/resumes/${resumeId}`,
-        UPLOAD_IMAGES: (resumeId) => `${BASE_URL}/${resumeId}/upload-images`,
+        UPLOAD_IMAGES: (resumeId) =>
+            `${BASE_URL}/resumes/${resumeId}/upload-images`,
     },
     IMAGE: {
         UPLOAD_IMAGE: `${BASE_URL}/auth/upload-image`,

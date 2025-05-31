@@ -445,16 +445,21 @@ const EditResume = () => {
                 imageDataUrl,
                 `resume-${resumeId}.png`
             );
-            const profileImageFile =
-                resumeData?.profileInfo?.profileImg || null;
-
+            console.log('thumbnailFile', thumbnailFile);
             const formData = new FormData();
-            if (profileImageFile)
-                formData.append('profileImage', profileImageFile);
+            let profileImage = resumeData?.profileInfo?.profileImg || null;
+            if (
+                profileImage &&
+                typeof profileImage === 'string' &&
+                profileImage.startsWith('data:')
+            ) {
+                profileImage = dataURLtoFile(profileImage, 'profile.png');
+            }
+            if (profileImage) formData.append('profileImage', profileImage);
             if (thumbnailFile) formData.append('thumbnail', thumbnailFile);
-            console.log('uploading images');
-            const uploadResponse = await axiosInstance.post(
-                API_PATHS.IMAGE.UPLOAD_IMAGE,
+            console.log(resumeId);
+            const uploadResponse = await axiosInstance.put(
+                API_PATHS.RESUME.UPLOAD_IMAGES(resumeId),
                 formData,
                 {
                     headers: {

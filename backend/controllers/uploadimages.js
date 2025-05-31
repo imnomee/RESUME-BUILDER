@@ -3,7 +3,7 @@ import path from 'path';
 import Resume from '../models/Resume.Model.js';
 import upload from '../middleware/upload.Middleware.js';
 
-export const uploadresumeImages = async (req, res) => {
+export const uploadResumeImages = async (req, res) => {
     try {
         upload.fields([{ name: 'thumbnail' }, { name: 'profileImage' }])(
             req,
