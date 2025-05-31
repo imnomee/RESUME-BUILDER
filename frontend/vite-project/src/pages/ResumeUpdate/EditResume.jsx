@@ -452,9 +452,9 @@ const EditResume = () => {
             if (profileImageFile)
                 formData.append('profileImage', profileImageFile);
             if (thumbnailFile) formData.append('thumbnail', thumbnailFile);
-
-            const uploadResponse = await axiosInstance.put(
-                API_PATHS.RESUME.UPLOAD_IMAGES(resumeId),
+            console.log('uploading images');
+            const uploadResponse = await axiosInstance.post(
+                API_PATHS.IMAGE.UPLOAD_IMAGE,
                 formData,
                 {
                     headers: {
@@ -649,7 +649,7 @@ const EditResume = () => {
                 isOpen={openThemeSelector}
                 onClose={() => setOpenThemeSelector(false)}
                 title={'Change Theme'}>
-                <div className="w-[90vw] h-[80vw]">
+                <div className="w-[90vw] h-[30vw]">
                     <ThemeSelector
                         selectedTheme={resumeData?.template}
                         setSelectedTheme={(value) =>

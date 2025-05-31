@@ -1,11 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
     DUMMY_RESUME_DATA,
     resumeTemplates,
     themeColorPalette,
-} from '../../data.js';
+} from '../../utils/data.js';
 
-import { LuCirlceCheckBig } from 'react-icons/lu';
+import { LuCircleCheckBig } from 'react-icons/lu';
 import Tabs from '../../components/Tabs.jsx';
 import TemplateCard from '../../components/Cards/TemplateCard.jsx';
 import RenderResume from '../../components/ResumeTemplates/RenderResume.jsx';
@@ -17,6 +17,25 @@ const TAB_DATA = [
         label: 'Color Palettes',
     },
 ];
+
+const ColorPalette = ({ colors, isSelected, onSelect }) => {
+    return (
+        <div
+            className={`h-28 bg-purple-50 flex rounded-lg overflow-hidden border-2 ${
+                isSelected ? 'border-purple-500' : 'border-none'
+            }`}>
+            {colors.map((color, index) => (
+                <div
+                    className="flex-1"
+                    key={index}
+                    style={{
+                        backgroundColor: colors[index],
+                    }}
+                    onClick={onSelect}></div>
+            ))}
+        </div>
+    );
+};
 
 const ThemeSelector = ({
     selectedTheme,
@@ -54,10 +73,9 @@ const ThemeSelector = ({
         updateBaseWidth();
         window.addEventListener('resize', updateBaseWidth);
         return () => {
-            window.removeEventListener('resize');
+            window.removeEventListener('resize', updateBaseWidth);
         };
     }, []);
-
     return (
         <div className="container mx-auto px-2 md:px-0">
             <div className="flex items-center justify-between mb-5 mt-2">
@@ -69,14 +87,14 @@ const ThemeSelector = ({
                 <button
                     className="btn-small-light"
                     onClick={() => handleThemeSelection()}>
-                    <LuCirlceCheckBig className="text-[16px]" />
+                    <LuCircleCheckBig className="text-[16px]" />
                     Done
                 </button>
             </div>
             <div className="grid grid-cols-12 gap-5 ">
                 <div className="col-span-12 md:col-span-5 bg-white">
-                    <div className="grid grid-cols-2 gap-0 max-h-[80vh] overflow-scroll custom-scrollbar md:pr-5">
-                        {tabValue === 'Template' &&
+                    <div className="grid grid-cols-2 gap-4 p-4 max-h-[80vh] overflow-scroll custom-scrollbar md:pr-5">
+                        {tabValue === 'Templates' &&
                             resumeTemplates.map((temp, index) => (
                                 <TemplateCard
                                     key={index}
@@ -93,7 +111,7 @@ const ThemeSelector = ({
                                 />
                             ))}
                         {tabValue === 'Color Palettes' &&
-                            themeColorPalette.themeOne.map((colors, index) => {
+                            themeColorPalette.themeOne.map((colors, index) => (
                                 <ColorPalette
                                     key={index}
                                     colors={colors}
@@ -106,8 +124,8 @@ const ThemeSelector = ({
                                             index,
                                         })
                                     }
-                                />;
-                            })}
+                                />
+                            ))}
                     </div>
                 </div>
                 <div
@@ -126,22 +144,3 @@ const ThemeSelector = ({
 };
 
 export default ThemeSelector;
-
-const ColorPalette = ({ colors, isSelected, onSelect }) => {
-    return (
-        <div
-            className={`h-28 bg-purple-50 flex rounded-lg overflow-hidden border-2 ${
-                isSelected ? 'border-purple-500' : 'border-none'
-            }`}>
-            {colors.map((color, index) => (
-                <div
-                    className="flex-1 "
-                    key={index}
-                    style={{
-                        backgroundColor: colors[index],
-                    }}
-                    onClick={onSelect}></div>
-            ))}
-        </div>
-    );
-};
